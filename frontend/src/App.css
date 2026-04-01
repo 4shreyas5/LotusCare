@@ -1,34 +1,220 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Lotus Care Custom Styles */
+
+/* Sticky Navigation */
+.nav-sticky {
+    background: rgba(255, 254, 249, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e8e4dd;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Hero gradient backgrounds */
+.hero-gradient-sage {
+    background: linear-gradient(135deg, #f0f7f2 0%, #d4e8da 100%);
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
+.hero-gradient-blush {
+    background: linear-gradient(135deg, #fdf5f0 0%, #f5e6dd 100%);
+}
+
+.hero-gradient-lavender {
+    background: linear-gradient(135deg, #eef2f8 0%, #dde5f5 100%);
+}
+
+/* Category card gradients */
+.category-healthcare {
+    background: linear-gradient(145deg, #d4e8da 0%, #b8d4c2 100%);
+}
+
+.category-home {
+    background: linear-gradient(145deg, #fdf5f0 0%, #f5e6dd 100%);
+}
+
+.category-personal {
+    background: linear-gradient(145deg, #eef2f8 0%, #dde5f5 100%);
+}
+
+/* Stats bar */
+.stats-bar {
+    background: linear-gradient(90deg, #2d5038 0%, #3d6648 100%);
+}
+
+/* Avatar circles */
+.avatar-circle {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+    border-radius: 50%;
+    font-family: 'Lora', serif;
+    font-weight: 600;
     color: white;
 }
 
-.App-link {
-    color: #61dafb;
+.avatar-sage { background: #4a7c59; }
+.avatar-blush { background: #e8c4b0; color: #2d5038; }
+.avatar-lavender { background: #a3b5d9; }
+.avatar-gold { background: #c9975a; }
+
+/* Star ratings */
+.star-filled { color: #c9975a; }
+.star-empty { color: #e8e4dd; }
+
+/* Price styling */
+.price-highlight {
+    color: #4a7c59;
+    font-family: 'Lora', serif;
+    font-weight: 600;
 }
 
-@keyframes App-logo-spin {
+/* Decorative elements */
+.quote-mark {
+    font-family: 'Lora', serif;
+    font-size: 72px;
+    color: #d4e8da;
+    line-height: 1;
+    position: absolute;
+    top: -10px;
+    right: 20px;
+}
+
+/* How it works connector line */
+.step-connector {
+    position: relative;
+}
+
+.step-connector::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: calc(50% + 28px);
+    width: calc(100% - 56px);
+    height: 2px;
+    border-top: 2px dashed #d4e8da;
+}
+
+.step-connector:last-child::after {
+    display: none;
+}
+
+/* Filter sidebar */
+.filter-section {
+    border-bottom: 1px solid #e8e4dd;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.filter-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Booking widget sticky */
+.booking-widget {
+    position: sticky;
+    top: 100px;
+}
+
+/* Tab styles */
+.tab-active {
+    color: #4a7c59;
+    border-bottom: 2px solid #4a7c59;
+}
+
+.tab-inactive {
+    color: #8a8a8a;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-inactive:hover {
+    color: #4a4a4a;
+}
+
+/* Stepper */
+.stepper-active {
+    background: #4a7c59;
+    color: white;
+}
+
+.stepper-complete {
+    background: #4a7c59;
+    color: white;
+}
+
+.stepper-inactive {
+    background: #e8e4dd;
+    color: #8a8a8a;
+}
+
+.stepper-line-active {
+    background: #4a7c59;
+}
+
+.stepper-line-inactive {
+    background: #e8e4dd;
+}
+
+/* Floating cards animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+    animation: float 4s ease-in-out infinite;
+}
+
+.float-animation-delayed {
+    animation: float 4s ease-in-out infinite 1s;
+}
+
+.float-animation-delayed-2 {
+    animation: float 4s ease-in-out infinite 2s;
+}
+
+/* Scroll reveal animations */
+@keyframes fadeInUp {
     from {
-        transform: rotate(0deg);
+        opacity: 0;
+        transform: translateY(30px);
     }
     to {
-        transform: rotate(360deg);
+        opacity: 1;
+        transform: translateY(0);
     }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f7f2;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b8d4c2;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4a7c59;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+    outline: 2px solid #4a7c59;
+    outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+    background: #d4e8da;
+    color: #2d5038;
 }
