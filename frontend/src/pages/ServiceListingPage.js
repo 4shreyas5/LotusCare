@@ -10,7 +10,7 @@ const providerData = {
     avatar: 'PS',
     title: 'Certified Nurse | Post-Surgery & Recovery Specialist',
     bio: 'With over 8 years of experience in post-operative care, I specialize in helping patients recover comfortably at home. My approach combines clinical expertise with genuine compassion — because healing happens best when you feel truly cared for. I\'ve worked with major hospitals in Mumbai and now focus exclusively on private home care.',
-    location: 'Mumbai, Maharashtra',
+    location: 'Mumbai, India',
     experience: '8 years',
     rating: 4.9,
     reviews: 312,
@@ -23,19 +23,19 @@ const providerData = {
     packages: {
       basic: {
         name: 'Basic Care',
-        price: 850,
+        price: 28,
         hours: '4 hours',
         features: ['Vital monitoring', 'Medication administration', 'Basic wound care', 'Patient mobility assistance'],
       },
       standard: {
         name: 'Standard Care',
-        price: 1500,
+        price: 55,
         hours: '8 hours',
         features: ['All Basic features', 'Detailed health reports', 'Meal preparation assistance', 'Family communication updates', 'Light physiotherapy'],
       },
       premium: {
         name: 'Premium Care',
-        price: 2800,
+        price: 95,
         hours: '12 hours',
         features: ['All Standard features', '24/7 availability on call', 'Coordination with doctors', 'Emergency response ready', 'Comprehensive recovery plan'],
       },
@@ -65,14 +65,14 @@ const providerData = {
       },
       {
         id: 2,
-        author: 'Anjali S.',
+        author: 'Emma V.',
         rating: 5,
         date: '1 month ago',
         text: 'Exceptional care! Priya went above and beyond, even helping us understand the medications and recovery process. My father recovered faster than expected.',
       },
       {
         id: 3,
-        author: 'Rahul K.',
+        author: 'Jan B.',
         rating: 5,
         date: '2 months ago',
         text: 'Very knowledgeable and caring. She treated my grandmother like family. The daily updates gave us peace of mind while we were at work.',
@@ -319,7 +319,7 @@ const ServiceListingPage = () => {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-medium text-sage-dark">{pkg.name}</span>
-                      <span className="price-highlight">₹{pkg.price}</span>
+                      <span className="price-highlight">€{pkg.price}</span>
                     </div>
                     <p className="text-xs text-lotus-text-muted mb-2">{pkg.hours} of care</p>
                     <ul className="space-y-1">

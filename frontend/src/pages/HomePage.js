@@ -14,40 +14,43 @@ const featuredProviders = [
     badgeColor: 'bg-gold/20 text-gold',
     rating: 5,
     reviews: 312,
-    price: '£25',
+    price: '€28',
     priceUnit: '/hr',
     emoji: '🧑‍⚕️',
     bgColor: 'bg-sage-pale',
+    location: 'Mumbai',
   },
   {
     id: 2,
-    name: 'Meera R.',
-    avatar: 'MR',
+    name: 'Anna V.',
+    avatar: 'AV',
     title: 'Specialized dementia and Alzheimer\'s daily care support',
     category: 'Medical',
     badge: 'Medical',
     badgeColor: 'bg-blue-100 text-blue-700',
     rating: 5,
     reviews: 204,
-    price: '£22',
+    price: '€32',
     priceUnit: '/hr',
     emoji: '👩‍🦳',
     bgColor: 'bg-blush-light',
+    location: 'Amsterdam',
   },
   {
     id: 3,
-    name: 'Sunita K.',
-    avatar: 'SK',
+    name: 'Sophie M.',
+    avatar: 'SM',
     title: 'Full-home cleaning, organizing, and grocery assistance',
     category: 'Home',
     badge: 'New',
     badgeColor: 'bg-sage/10 text-sage',
     rating: 4,
     reviews: 88,
-    price: '£18',
+    price: '€22',
     priceUnit: '/hr',
     emoji: '🏠',
     bgColor: 'bg-blue-50',
+    location: 'Rotterdam',
   },
   {
     id: 4,
@@ -59,10 +62,11 @@ const featuredProviders = [
     badgeColor: 'bg-purple-100 text-purple-700',
     rating: 5,
     reviews: 176,
-    price: '£45',
+    price: '€55',
     priceUnit: '/session',
     emoji: '💆',
     bgColor: 'bg-purple-50',
+    location: 'Delhi',
   },
 ];
 
@@ -120,20 +124,20 @@ const testimonials = [
   },
   {
     id: 2,
-    quote: 'As working parents, we needed someone we could trust with our children. The thorough background checks gave us peace of mind we couldn\'t find elsewhere.',
-    author: 'Ananya Sharma',
+    quote: 'Als werkende ouders hadden we iemand nodig die we konden vertrouwen. De grondige achtergrondcontroles gaven ons de gemoedsrust die we elders niet vonden.',
+    author: 'Emma de Vries',
     role: 'Working Parent',
-    city: 'Bangalore',
-    avatar: 'AS',
+    city: 'Amsterdam',
+    avatar: 'EV',
     avatarColor: 'avatar-blush',
   },
   {
     id: 3,
     quote: 'The grief counseling I found through Lotus Care helped me navigate the hardest year of my life. Professional, compassionate, and truly life-changing.',
-    author: 'Rahul Kapoor',
+    author: 'Jan van der Berg',
     role: 'Individual Client',
-    city: 'Delhi',
-    avatar: 'RK',
+    city: 'Utrecht',
+    avatar: 'JB',
     avatarColor: 'avatar-lavender',
   },
 ];
@@ -150,7 +154,7 @@ const HomePage = () => {
               {/* Eyebrow Badge */}
               <div className="inline-flex items-center gap-2 bg-sage-pale rounded-pill px-4 py-2">
                 <span className="w-2 h-2 bg-sage rounded-full animate-pulse"></span>
-                <span className="text-sm font-medium text-sage">Trusted by 40,000+ families across India</span>
+                <span className="text-sm font-medium text-sage">Trusted by 40,000+ families across India & Europe</span>
               </div>
 
               {/* Headline */}
@@ -231,7 +235,7 @@ const HomePage = () => {
                       ))}
                       <span className="text-xs text-lotus-text-muted ml-1">(312)</span>
                     </div>
-                    <p className="text-sage font-serif font-semibold mt-2">Starting at ₹850/hr</p>
+                    <p className="text-sage font-serif font-semibold mt-2">Starting at €28/hr</p>
                   </div>
                 </div>
               </div>

@@ -11,7 +11,7 @@ const profileData = {
     title: 'Certified Nurse | Post-Surgery & Recovery Specialist',
     tagline: 'Bringing compassionate care to your home',
     bio: 'With over 8 years of experience in post-operative care, I specialize in helping patients recover comfortably at home. My approach combines clinical expertise with genuine compassion — because healing happens best when you feel truly cared for.',
-    location: 'Mumbai, Maharashtra',
+    location: 'Mumbai, India',
     memberSince: 'January 2020',
     experience: '8 years',
     rating: 4.9,
@@ -28,7 +28,7 @@ const profileData = {
         id: 1,
         title: 'Post-Surgery Recovery Care',
         description: 'Complete nursing care for patients recovering from surgery',
-        price: 850,
+        price: 28,
         unit: '/hr',
         rating: 4.9,
         reviews: 156,
@@ -37,7 +37,7 @@ const profileData = {
         id: 2,
         title: 'Elderly Daily Care',
         description: 'Compassionate daily assistance for senior family members',
-        price: 700,
+        price: 25,
         unit: '/hr',
         rating: 4.8,
         reviews: 98,
@@ -46,7 +46,7 @@ const profileData = {
         id: 3,
         title: 'Wound Care & Dressing',
         description: 'Professional wound management and dressing changes',
-        price: 500,
+        price: 18,
         unit: '/visit',
         rating: 5.0,
         reviews: 58,
@@ -70,8 +70,8 @@ const profileData = {
       },
       {
         id: 2,
-        author: 'Anjali Sharma',
-        avatar: 'AS',
+        author: 'Emma van Dijk',
+        avatar: 'EV',
         rating: 5,
         date: '1 month ago',
         service: 'Elderly Daily Care',
@@ -268,7 +268,7 @@ const ProviderProfilePage = () => {
                     </div>
                     <div className="text-right">
                       <p className="price-highlight text-xl">
-                        ₹{service.price}<span className="text-lotus-text-muted font-normal text-sm">{service.unit}</span>
+                        €{service.price}<span className="text-lotus-text-muted font-normal text-sm">{service.unit}</span>
                       </p>
                       <span className="btn-primary text-sm mt-2 inline-block">View Details</span>
                     </div>
@@ -388,7 +388,7 @@ const ProviderProfilePage = () => {
             <div className="booking-widget card-lotus p-6 space-y-4">
               <div>
                 <p className="text-sm text-lotus-text-muted">Starting from</p>
-                <p className="price-highlight text-2xl">₹700<span className="text-lotus-text-muted font-normal text-sm">/hr</span></p>
+                <p className="price-highlight text-2xl">€18<span className="text-lotus-text-muted font-normal text-sm">/hr</span></p>
               </div>
 
               <Link

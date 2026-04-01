@@ -16,7 +16,7 @@ const BookingFlowPage = () => {
     address: '',
     city: '',
     pincode: '',
-    paymentMethod: 'upi',
+    paymentMethod: 'ideal',
     promoCode: '',
   });
 
@@ -30,9 +30,9 @@ const BookingFlowPage = () => {
   };
 
   const packages = {
-    basic: { name: 'Basic Care', price: 850, hours: '4 hours' },
-    standard: { name: 'Standard Care', price: 1500, hours: '8 hours' },
-    premium: { name: 'Premium Care', price: 2800, hours: '12 hours' },
+    basic: { name: 'Basic Care', price: 28, hours: '4 hours' },
+    standard: { name: 'Standard Care', price: 55, hours: '8 hours' },
+    premium: { name: 'Premium Care', price: 95, hours: '12 hours' },
   };
 
   const selectedPackage = packages[packageType] || packages.standard;
@@ -297,16 +297,16 @@ const BookingFlowPage = () => {
                   <hr className="border-lotus-border" />
                   <div className="flex justify-between text-sm">
                     <span className="text-lotus-text-muted">Service Fee</span>
-                    <span className="text-sage-dark">₹{selectedPackage.price}</span>
+                    <span className="text-sage-dark">€{selectedPackage.price}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-lotus-text-muted">Platform Fee</span>
-                    <span className="text-sage-dark">₹50</span>
+                    <span className="text-sage-dark">€5</span>
                   </div>
                   <hr className="border-lotus-border" />
                   <div className="flex justify-between">
                     <span className="font-medium text-sage-dark">Total</span>
-                    <span className="price-highlight text-xl">₹{selectedPackage.price + 50}</span>
+                    <span className="price-highlight text-xl">€{selectedPackage.price + 5}</span>
                   </div>
                 </div>
 
@@ -333,10 +333,10 @@ const BookingFlowPage = () => {
 
                 <div className="space-y-3">
                   {[
+                    { value: 'ideal', label: 'iDEAL', icon: Building2, desc: 'Dutch bank transfer' },
+                    { value: 'card', label: 'Credit/Debit Card', icon: CreditCard, desc: 'Visa, Mastercard, Maestro' },
                     { value: 'upi', label: 'UPI', icon: Smartphone, desc: 'Pay using any UPI app' },
-                    { value: 'card', label: 'Credit/Debit Card', icon: CreditCard, desc: 'Visa, Mastercard, RuPay' },
-                    { value: 'netbanking', label: 'Net Banking', icon: Building2, desc: 'All major banks supported' },
-                    { value: 'wallet', label: 'Wallet', icon: Wallet, desc: 'Paytm, PhonePe, Amazon Pay' },
+                    { value: 'bancontact', label: 'Bancontact', icon: Wallet, desc: 'Belgium & Netherlands' },
                   ].map((method) => (
                     <button
                       key={method.value}
@@ -386,7 +386,7 @@ const BookingFlowPage = () => {
                   Back
                 </button>
                 <button className="btn-primary" data-testid="confirm-booking-btn">
-                  Confirm Booking — ₹{selectedPackage.price + 50}
+                  Confirm Booking — €{selectedPackage.price + 5}
                 </button>
               </div>
             </div>

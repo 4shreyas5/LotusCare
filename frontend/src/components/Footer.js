@@ -46,12 +46,12 @@ const Footer = () => {
                   Lotus Care
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.15em] text-white/60 font-medium -mt-0.5">
-                  India's Care Marketplace
+                  Care Marketplace
                 </span>
               </div>
             </Link>
             <p className="text-white/70 text-sm leading-relaxed mt-4">
-              Connecting families with verified, compassionate caregivers across India. 
+              Connecting families with verified, compassionate caregivers across India and Europe. 
               Trust, safety, and human connection — that's our promise.
             </p>
           </div>

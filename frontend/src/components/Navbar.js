@@ -26,7 +26,7 @@ const Navbar = () => {
                 Lotus Care
               </span>
               <span className="text-[10px] uppercase tracking-[0.15em] text-lotus-text-muted font-medium -mt-0.5">
-                India's Care Marketplace
+                Care Marketplace
               </span>
             </div>
           </Link>
