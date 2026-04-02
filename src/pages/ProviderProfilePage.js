@@ -1,104 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ChevronRight, Star, Check, Shield, Clock, MapPin, MessageCircle, Calendar, Settings, Award } from 'lucide-react';
-
-// Mock provider profile data
-const profileData = {
-  1: {
-    id: 1,
-    name: 'Priya Sharma',
-    avatar: 'PS',
-    title: 'Certified Nurse | Post-Surgery & Recovery Specialist',
-    tagline: 'Bringing compassionate care to your home',
-    bio: 'With over 8 years of experience in post-operative care, I specialize in helping patients recover comfortably at home. My approach combines clinical expertise with genuine compassion — because healing happens best when you feel truly cared for.',
-    location: 'Mumbai, India',
-    memberSince: 'January 2020',
-    experience: '8 years',
-    rating: 4.9,
-    totalReviews: 312,
-    totalBookings: 456,
-    responseTime: 'Within 1 hour',
-    languages: ['English', 'Hindi', 'Marathi'],
-    verified: true,
-    topRated: true,
-    areasServed: ['Mumbai', 'Thane', 'Navi Mumbai'],
-    workingStyle: 'I believe in building a relationship with my patients and their families. My care approach includes regular health updates, family education on patient care, and 24/7 availability for emergencies.',
-    services: [
-      {
-        id: 1,
-        title: 'Post-Surgery Recovery Care',
-        description: 'Complete nursing care for patients recovering from surgery',
-        price: 28,
-        unit: '/hr',
-        rating: 4.9,
-        reviews: 156,
-      },
-      {
-        id: 2,
-        title: 'Elderly Daily Care',
-        description: 'Compassionate daily assistance for senior family members',
-        price: 25,
-        unit: '/hr',
-        rating: 4.8,
-        reviews: 98,
-      },
-      {
-        id: 3,
-        title: 'Wound Care & Dressing',
-        description: 'Professional wound management and dressing changes',
-        price: 18,
-        unit: '/visit',
-        rating: 5.0,
-        reviews: 58,
-      },
-    ],
-    credentials: [
-      { name: 'B.Sc Nursing', institution: 'Mumbai University', year: '2015', verified: true },
-      { name: 'Post-Surgery Care Certification', institution: 'Apollo Hospitals', year: '2018', verified: true },
-      { name: 'BLS & ACLS Certified', institution: 'American Heart Association', year: '2023', verified: true },
-      { name: 'Geriatric Care Specialist', institution: 'Indian Nursing Council', year: '2021', verified: true },
-    ],
-    reviews: [
-      {
-        id: 1,
-        author: 'Vikram Mehta',
-        avatar: 'VM',
-        rating: 5,
-        date: '2 weeks ago',
-        service: 'Post-Surgery Recovery Care',
-        text: 'Priya took care of my mother after her hip replacement surgery. Her professionalism and warmth made a difficult time so much easier. She was always punctual and kept us informed about everything.',
-      },
-      {
-        id: 2,
-        author: 'Emma van Dijk',
-        avatar: 'EV',
-        rating: 5,
-        date: '1 month ago',
-        service: 'Elderly Daily Care',
-        text: 'Exceptional care for my father! Priya treated him with such dignity and patience. She even taught us how to help with his exercises when she wasn\'t there.',
-      },
-      {
-        id: 3,
-        author: 'Rahul Kapoor',
-        avatar: 'RK',
-        rating: 5,
-        date: '2 months ago',
-        service: 'Post-Surgery Recovery Care',
-        text: 'Very knowledgeable and caring. The daily updates gave us peace of mind while we were at work. Highly recommend!',
-      },
-    ],
-  },
-};
-
-// Generate similar data for other providers
-for (let i = 2; i <= 10; i++) {
-  profileData[i] = {
-    ...profileData[1],
-    id: i,
-    name: ['Meera Reddy', 'Rajesh Kumar', 'Lakshmi Nair', 'Sunita Kumari', 'Geeta Devi', 'Fatima Khan', 'Arjun Patel', 'Dr. Neha Gupta', 'Ravi Menon'][i - 2],
-    avatar: ['MR', 'RK', 'LN', 'SK', 'GD', 'FK', 'AP', 'NG', 'RM'][i - 2],
-  };
-}
+import {
+  ChevronRight,
+  Star,
+  Check,
+  Shield,
+  Clock,
+  MapPin,
+  MessageCircle,
+  Calendar,
+  Award,
+} from 'lucide-react';
+import { profileData } from '../data/providers';
 
 const ProviderProfilePage = () => {
   const { providerId } = useParams();
@@ -153,7 +66,11 @@ const ProviderProfilePage = () => {
               >
                 Book a Session
               </Link>
-              <button className="btn-outline" data-testid="message-btn">
+              <button
+                className="btn-outline"
+                data-testid="message-btn"
+                onClick={() => console.log('Message clicked')}
+              >
                 <MessageCircle size={18} />
               </button>
             </div>
@@ -162,7 +79,9 @@ const ProviderProfilePage = () => {
           {/* Stats Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center">
-              <p className="font-serif text-2xl font-medium text-sage-dark">{provider.totalBookings}</p>
+              <p className="font-serif text-2xl font-medium text-sage-dark">
+                {provider.totalBookings}
+              </p>
               <p className="text-sm text-lotus-text-muted">Total Bookings</p>
             </div>
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center">
@@ -170,13 +89,17 @@ const ProviderProfilePage = () => {
               <p className="text-sm text-lotus-text-muted">Experience</p>
             </div>
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center">
-              <p className="font-serif text-2xl font-medium text-sage-dark">{provider.responseTime}</p>
+              <p className="font-serif text-2xl font-medium text-sage-dark">
+                {provider.responseTime}
+              </p>
               <p className="text-sm text-lotus-text-muted">Response Time</p>
             </div>
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center">
               <div className="flex items-center justify-center gap-1">
                 <Star size={18} className="text-gold fill-gold" />
-                <span className="font-serif text-2xl font-medium text-sage-dark">{provider.rating}</span>
+                <span className="font-serif text-2xl font-medium text-sage-dark">
+                  {provider.rating}
+                </span>
               </div>
               <p className="text-sm text-lotus-text-muted">{provider.totalReviews} reviews</p>
             </div>
@@ -192,9 +115,7 @@ const ProviderProfilePage = () => {
               <button
                 key={tab.id}
                 className={`py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 -mb-px ${
-                  activeTab === tab.id
-                    ? 'tab-active'
-                    : 'tab-inactive'
+                  activeTab === tab.id ? 'tab-active' : 'tab-inactive'
                 }`}
                 onClick={() => setActiveTab(tab.id)}
                 data-testid={`tab-${tab.id}`}
@@ -237,7 +158,9 @@ const ProviderProfilePage = () => {
                   <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">Languages</h2>
                   <div className="flex flex-wrap gap-2">
                     {provider.languages.map((lang) => (
-                      <span key={lang} className="badge-blush">{lang}</span>
+                      <span key={lang} className="badge-blush">
+                        {lang}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -255,7 +178,9 @@ const ProviderProfilePage = () => {
                     data-testid={`service-card-${service.id}`}
                   >
                     <div className="flex-1">
-                      <h3 className="font-serif text-lg font-medium text-sage-dark mb-1">{service.title}</h3>
+                      <h3 className="font-serif text-lg font-medium text-sage-dark mb-1">
+                        {service.title}
+                      </h3>
                       <p className="text-sm text-lotus-text-muted mb-2">{service.description}</p>
                       <div className="flex items-center gap-1">
                         {[...Array(5)].map((_, i) => (
@@ -268,7 +193,8 @@ const ProviderProfilePage = () => {
                     </div>
                     <div className="text-right">
                       <p className="price-highlight text-xl">
-                        €{service.price}<span className="text-lotus-text-muted font-normal text-sm">{service.unit}</span>
+                        €{service.price}
+                        <span className="text-lotus-text-muted font-normal text-sm">{service.unit}</span>
                       </p>
                       <span className="btn-primary text-sm mt-2 inline-block">View Details</span>
                     </div>
@@ -284,7 +210,9 @@ const ProviderProfilePage = () => {
                 <div className="card-lotus p-6 lg:p-8">
                   <div className="flex flex-col sm:flex-row gap-6 items-center">
                     <div className="text-center">
-                      <p className="font-serif text-5xl font-medium text-sage-dark">{provider.rating}</p>
+                      <p className="font-serif text-5xl font-medium text-sage-dark">
+                        {provider.rating}
+                      </p>
                       <div className="flex items-center justify-center gap-1 my-2">
                         {[...Array(5)].map((_, i) => (
                           <Star key={i} size={18} className="text-gold fill-gold" />
@@ -320,7 +248,13 @@ const ProviderProfilePage = () => {
                         </div>
                         <div className="flex items-center gap-1 mb-1">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} size={12} className={i < review.rating ? 'text-gold fill-gold' : 'text-lotus-border'} />
+                            <Star
+                              key={i}
+                              size={12}
+                              className={
+                                i < review.rating ? 'text-gold fill-gold' : 'text-lotus-border'
+                              }
+                            />
                           ))}
                         </div>
                         <p className="text-xs text-sage mb-2">{review.service}</p>
@@ -330,7 +264,11 @@ const ProviderProfilePage = () => {
                   </div>
                 ))}
 
-                <button className="btn-outline w-full" data-testid="load-more-reviews">
+                <button
+                  className="btn-outline w-full"
+                  data-testid="load-more-reviews"
+                  onClick={() => console.log('Load more reviews')}
+                >
                   Load more reviews
                 </button>
               </div>
@@ -346,7 +284,9 @@ const ProviderProfilePage = () => {
                     </div>
                     <div>
                       <p className="font-medium text-sage-dark">Identity Verified</p>
-                      <p className="text-sm text-lotus-text-muted">Government ID verified by Lotus Care</p>
+                      <p className="text-sm text-lotus-text-muted">
+                        Government ID verified by Lotus Care
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -361,7 +301,11 @@ const ProviderProfilePage = () => {
                 </div>
 
                 {provider.credentials.map((cred, index) => (
-                  <div key={index} className="card-lotus p-6 flex items-start gap-4" data-testid={`credential-${index}`}>
+                  <div
+                    key={index}
+                    className="card-lotus p-6 flex items-start gap-4"
+                    data-testid={`credential-${index}`}
+                  >
                     <div className="w-12 h-12 rounded-full bg-sage-pale flex items-center justify-center flex-shrink-0">
                       <Award size={20} className="text-sage" />
                     </div>
@@ -388,7 +332,9 @@ const ProviderProfilePage = () => {
             <div className="booking-widget card-lotus p-6 space-y-4">
               <div>
                 <p className="text-sm text-lotus-text-muted">Starting from</p>
-                <p className="price-highlight text-2xl">€18<span className="text-lotus-text-muted font-normal text-sm">/hr</span></p>
+                <p className="price-highlight text-2xl">
+                  €18<span className="text-lotus-text-muted font-normal text-sm">/hr</span>
+                </p>
               </div>
 
               <Link
@@ -399,7 +345,11 @@ const ProviderProfilePage = () => {
                 <Calendar size={18} className="mr-2" /> Book a Session
               </Link>
 
-              <button className="btn-outline w-full" data-testid="sidebar-message-btn">
+              <button
+                className="btn-outline w-full"
+                data-testid="sidebar-message-btn"
+                onClick={() => console.log('Message clicked')}
+              >
                 <MessageCircle size={18} className="mr-2" /> Message
               </button>
 

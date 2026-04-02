@@ -1,99 +1,22 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ChevronRight, Star, Check, Shield, Clock, MapPin, MessageCircle, Calendar, Heart, Share2 } from 'lucide-react';
-
-// Mock provider data
-const providerData = {
-  1: {
-    id: 1,
-    name: 'Priya Sharma',
-    avatar: 'PS',
-    title: 'Certified Nurse | Post-Surgery & Recovery Specialist',
-    bio: 'With over 8 years of experience in post-operative care, I specialize in helping patients recover comfortably at home. My approach combines clinical expertise with genuine compassion — because healing happens best when you feel truly cared for. I\'ve worked with major hospitals in Mumbai and now focus exclusively on private home care.',
-    location: 'Mumbai, India',
-    experience: '8 years',
-    rating: 4.9,
-    reviews: 312,
-    repeatHire: 94,
-    responseTime: '< 1 hour',
-    languages: ['English', 'Hindi', 'Marathi'],
-    verified: true,
-    topRated: true,
-    category: 'healthcare',
-    packages: {
-      basic: {
-        name: 'Basic Care',
-        price: 28,
-        hours: '4 hours',
-        features: ['Vital monitoring', 'Medication administration', 'Basic wound care', 'Patient mobility assistance'],
-      },
-      standard: {
-        name: 'Standard Care',
-        price: 55,
-        hours: '8 hours',
-        features: ['All Basic features', 'Detailed health reports', 'Meal preparation assistance', 'Family communication updates', 'Light physiotherapy'],
-      },
-      premium: {
-        name: 'Premium Care',
-        price: 95,
-        hours: '12 hours',
-        features: ['All Standard features', '24/7 availability on call', 'Coordination with doctors', 'Emergency response ready', 'Comprehensive recovery plan'],
-      },
-    },
-    included: [
-      'Initial health assessment',
-      'Personalized care plan',
-      'Daily progress reports',
-      'Medication management',
-      'Vital signs monitoring',
-      'Wound dressing & care',
-      'Patient mobility support',
-      'Family guidance & training',
-    ],
-    credentials: [
-      { name: 'B.Sc Nursing', institution: 'Mumbai University', year: '2015' },
-      { name: 'Post-Surgery Care Certification', institution: 'Apollo Hospitals', year: '2018' },
-      { name: 'BLS & ACLS Certified', institution: 'American Heart Association', year: '2023' },
-    ],
-    reviewsList: [
-      {
-        id: 1,
-        author: 'Vikram M.',
-        rating: 5,
-        date: '2 weeks ago',
-        text: 'Priya took care of my mother after her hip replacement surgery. Her professionalism and warmth made a difficult time so much easier. Highly recommend!',
-      },
-      {
-        id: 2,
-        author: 'Emma V.',
-        rating: 5,
-        date: '1 month ago',
-        text: 'Exceptional care! Priya went above and beyond, even helping us understand the medications and recovery process. My father recovered faster than expected.',
-      },
-      {
-        id: 3,
-        author: 'Jan B.',
-        rating: 5,
-        date: '2 months ago',
-        text: 'Very knowledgeable and caring. She treated my grandmother like family. The daily updates gave us peace of mind while we were at work.',
-      },
-    ],
-  },
-};
-
-// Generate similar data for other providers
-for (let i = 2; i <= 10; i++) {
-  providerData[i] = {
-    ...providerData[1],
-    id: i,
-    name: ['Meera Reddy', 'Rajesh Kumar', 'Lakshmi Nair', 'Sunita Kumari', 'Geeta Devi', 'Fatima Khan', 'Arjun Patel', 'Dr. Neha Gupta', 'Ravi Menon'][i - 2],
-    avatar: ['MR', 'RK', 'LN', 'SK', 'GD', 'FK', 'AP', 'NG', 'RM'][i - 2],
-  };
-}
+import {
+  ChevronRight,
+  Star,
+  Check,
+  Shield,
+  Clock,
+  MapPin,
+  MessageCircle,
+  Calendar,
+  Heart,
+  Share2,
+} from 'lucide-react';
+import { providerDetails } from '../data/providers';
 
 const ServiceListingPage = () => {
   const { serviceId } = useParams();
-  const provider = providerData[serviceId] || providerData[1];
+  const provider = providerDetails[serviceId] || providerDetails[1];
   const [selectedPackage, setSelectedPackage] = useState('standard');
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -113,11 +36,19 @@ const ServiceListingPage = () => {
       <div className="bg-warm-white border-b border-lotus-border">
         <div className="section-container py-4">
           <nav className="flex items-center gap-2 text-sm flex-wrap">
-            <Link to="/" className="text-lotus-text-muted hover:text-sage transition-colors" data-testid="breadcrumb-home">
+            <Link
+              to="/"
+              className="text-lotus-text-muted hover:text-sage transition-colors"
+              data-testid="breadcrumb-home"
+            >
               Home
             </Link>
             <ChevronRight size={14} className="text-lotus-text-muted" />
-            <Link to="/category/healthcare" className="text-lotus-text-muted hover:text-sage transition-colors" data-testid="breadcrumb-category">
+            <Link
+              to="/category/healthcare"
+              className="text-lotus-text-muted hover:text-sage transition-colors"
+              data-testid="breadcrumb-category"
+            >
               Healthcare Support
             </Link>
             <ChevronRight size={14} className="text-lotus-text-muted" />
@@ -138,7 +69,9 @@ const ServiceListingPage = () => {
                 </div>
                 <div className="flex-1 text-center sm:text-left">
                   <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
-                    <h1 className="font-serif text-2xl font-medium text-sage-dark">{provider.name}</h1>
+                    <h1 className="font-serif text-2xl font-medium text-sage-dark">
+                      {provider.name}
+                    </h1>
                     {provider.verified && (
                       <span className="badge-sage text-xs">
                         <Check size={12} className="mr-1" /> Verified
@@ -173,10 +106,18 @@ const ServiceListingPage = () => {
                   </div>
                 </div>
                 <div className="flex sm:flex-col gap-2 justify-center">
-                  <button className="p-2 rounded-full border border-lotus-border hover:border-sage hover:text-sage transition-colors" data-testid="save-btn">
+                  <button
+                    className="p-2 rounded-full border border-lotus-border hover:border-sage hover:text-sage transition-colors"
+                    data-testid="save-btn"
+                    onClick={() => console.log('Saved to favorites')}
+                  >
                     <Heart size={20} />
                   </button>
-                  <button className="p-2 rounded-full border border-lotus-border hover:border-sage hover:text-sage transition-colors" data-testid="share-btn">
+                  <button
+                    className="p-2 rounded-full border border-lotus-border hover:border-sage hover:text-sage transition-colors"
+                    data-testid="share-btn"
+                    onClick={() => console.log('Share clicked')}
+                  >
                     <Share2 size={20} />
                   </button>
                 </div>
@@ -189,7 +130,9 @@ const ServiceListingPage = () => {
               <p className="text-body leading-relaxed">{provider.bio}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {provider.languages.map((lang) => (
-                  <span key={lang} className="badge-blush text-xs">{lang}</span>
+                  <span key={lang} className="badge-blush text-xs">
+                    {lang}
+                  </span>
                 ))}
               </div>
             </div>
@@ -209,7 +152,9 @@ const ServiceListingPage = () => {
 
             {/* Credentials */}
             <div className="card-lotus p-6 lg:p-8" data-testid="credentials-section">
-              <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">Credentials & Certifications</h2>
+              <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">
+                Credentials & Certifications
+              </h2>
               <div className="space-y-4">
                 {provider.credentials.map((cred, index) => (
                   <div key={index} className="flex items-start gap-4 p-4 bg-sage-pale/50 rounded-xl">
@@ -218,7 +163,9 @@ const ServiceListingPage = () => {
                     </div>
                     <div>
                       <p className="font-medium text-sage-dark">{cred.name}</p>
-                      <p className="text-sm text-lotus-text-muted">{cred.institution} • {cred.year}</p>
+                      <p className="text-sm text-lotus-text-muted">
+                        {cred.institution} • {cred.year}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -242,7 +189,9 @@ const ServiceListingPage = () => {
               {/* Rating Breakdown */}
               <div className="mb-6 p-4 bg-sage-pale/30 rounded-xl">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="font-serif text-4xl font-medium text-sage-dark">{provider.rating}</span>
+                  <span className="font-serif text-4xl font-medium text-sage-dark">
+                    {provider.rating}
+                  </span>
                   <div>
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
@@ -257,7 +206,7 @@ const ServiceListingPage = () => {
                     <div key={rating} className="flex items-center gap-3">
                       <span className="text-sm text-lotus-text-muted w-12">{rating} stars</span>
                       <div className="flex-1 h-2 bg-lotus-border rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-gold rounded-full"
                           style={{ width: rating === 5 ? '85%' : rating === 4 ? '10%' : '5%' }}
                         ></div>
@@ -270,9 +219,14 @@ const ServiceListingPage = () => {
               {/* Individual Reviews */}
               <div className="space-y-6">
                 {provider.reviewsList.map((review) => (
-                  <div key={review.id} className="pb-6 border-b border-lotus-border last:border-0 last:pb-0">
+                  <div
+                    key={review.id}
+                    className="pb-6 border-b border-lotus-border last:border-0 last:pb-0"
+                  >
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 avatar-circle avatar-sage text-sm">{review.author[0]}</div>
+                      <div className="w-10 h-10 avatar-circle avatar-sage text-sm">
+                        {review.author[0]}
+                      </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="font-medium text-sage-dark">{review.author}</span>
@@ -280,7 +234,13 @@ const ServiceListingPage = () => {
                         </div>
                         <div className="flex items-center gap-1 mb-2">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} size={12} className={i < review.rating ? 'text-gold fill-gold' : 'text-lotus-border'} />
+                            <Star
+                              key={i}
+                              size={12}
+                              className={
+                                i < review.rating ? 'text-gold fill-gold' : 'text-lotus-border'
+                              }
+                            />
                           ))}
                         </div>
                         <p className="text-body">{review.text}</p>
@@ -290,7 +250,11 @@ const ServiceListingPage = () => {
                 ))}
               </div>
 
-              <button className="btn-outline w-full mt-6" data-testid="load-more-reviews-btn">
+              <button
+                className="btn-outline w-full mt-6"
+                data-testid="load-more-reviews-btn"
+                onClick={() => console.log('Load more reviews')}
+              >
                 Load more reviews
               </button>
             </div>
@@ -310,8 +274,8 @@ const ServiceListingPage = () => {
                   <button
                     key={key}
                     className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
-                      selectedPackage === key 
-                        ? 'border-sage bg-sage-pale/30' 
+                      selectedPackage === key
+                        ? 'border-sage bg-sage-pale/30'
                         : 'border-lotus-border hover:border-sage/50'
                     }`}
                     onClick={() => setSelectedPackage(key)}
@@ -348,8 +312,8 @@ const ServiceListingPage = () => {
                         selectedDate === i
                           ? 'bg-sage text-white'
                           : d.available
-                            ? 'bg-sage-pale/50 hover:bg-sage-pale text-sage-dark'
-                            : 'bg-lotus-border/30 text-lotus-text-muted cursor-not-allowed'
+                          ? 'bg-sage-pale/50 hover:bg-sage-pale text-sage-dark'
+                          : 'bg-lotus-border/30 text-lotus-text-muted cursor-not-allowed'
                       }`}
                       onClick={() => d.available && setSelectedDate(i)}
                       data-testid={`date-${d.date}`}
@@ -370,7 +334,11 @@ const ServiceListingPage = () => {
                 >
                   <Calendar size={18} className="mr-2" /> Book Now
                 </Link>
-                <button className="btn-outline w-full" data-testid="message-provider-btn">
+                <button
+                  className="btn-outline w-full"
+                  data-testid="message-provider-btn"
+                  onClick={() => console.log('Message provider clicked')}
+                >
                   <MessageCircle size={18} className="mr-2" /> Message Provider
                 </button>
               </div>

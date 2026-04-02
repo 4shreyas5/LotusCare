@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { ChevronRight, Check, Shield, Clock, Calendar, MapPin, CreditCard, Smartphone, Building2, Wallet, Tag } from 'lucide-react';
+import {
+  ChevronRight,
+  Check,
+  Shield,
+  Clock,
+  Calendar,
+  MapPin,
+  CreditCard,
+  Smartphone,
+  Building2,
+  Wallet,
+  Tag,
+} from 'lucide-react';
 
 const BookingFlowPage = () => {
   const { providerId } = useParams();
@@ -19,6 +31,8 @@ const BookingFlowPage = () => {
     paymentMethod: 'ideal',
     promoCode: '',
   });
+
+  const [bookingConfirmed, setBookingConfirmed] = useState(false);
 
   const provider = {
     id: providerId || 1,
@@ -44,9 +58,17 @@ const BookingFlowPage = () => {
   ];
 
   const timeSlots = [
-    '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM',
-    '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM',
-    '4:00 PM', '5:00 PM', '6:00 PM',
+    '8:00 AM',
+    '9:00 AM',
+    '10:00 AM',
+    '11:00 AM',
+    '12:00 PM',
+    '1:00 PM',
+    '2:00 PM',
+    '3:00 PM',
+    '4:00 PM',
+    '5:00 PM',
+    '6:00 PM',
   ];
 
   const handleNext = () => {
@@ -57,15 +79,84 @@ const BookingFlowPage = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
+  const handleConfirmBooking = () => {
+    console.log('Booking confirmed:', {
+      provider,
+      package: selectedPackage,
+      formData,
+    });
+    setBookingConfirmed(true);
+  };
+
+  if (bookingConfirmed) {
+    return (
+      <div className="pt-20 bg-cream min-h-screen" data-testid="booking-confirmation">
+        <div className="section-container py-16">
+          <div className="max-w-lg mx-auto text-center">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-sage/10 flex items-center justify-center">
+              <Check size={40} className="text-sage" />
+            </div>
+            <h1 className="heading-section mb-4">Booking Confirmed!</h1>
+            <p className="text-body mb-8">
+              Your booking with {provider.name} has been confirmed. You will receive a confirmation
+              email shortly with all the details.
+            </p>
+            <div className="card-lotus p-6 mb-8 text-left">
+              <h3 className="font-serif text-lg font-medium text-sage-dark mb-4">Booking Summary</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-lotus-text-muted">Service</span>
+                  <span className="text-sage-dark">{selectedPackage.name}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-lotus-text-muted">Provider</span>
+                  <span className="text-sage-dark">{provider.name}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-lotus-text-muted">Date</span>
+                  <span className="text-sage-dark">{formData.date || 'To be confirmed'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-lotus-text-muted">Time</span>
+                  <span className="text-sage-dark">{formData.time || 'To be confirmed'}</span>
+                </div>
+                <hr className="border-lotus-border my-2" />
+                <div className="flex justify-between font-medium">
+                  <span className="text-sage-dark">Total</span>
+                  <span className="price-highlight">€{selectedPackage.price + 5}</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/" className="btn-primary">
+                Back to Home
+              </Link>
+              <Link to="/category/healthcare" className="btn-outline">
+                Browse More Providers
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-20 bg-cream min-h-screen" data-testid="booking-flow-page">
       {/* Breadcrumb */}
       <div className="bg-warm-white border-b border-lotus-border">
         <div className="section-container py-4">
           <nav className="flex items-center gap-2 text-sm flex-wrap">
-            <Link to="/" className="text-lotus-text-muted hover:text-sage transition-colors">Home</Link>
+            <Link to="/" className="text-lotus-text-muted hover:text-sage transition-colors">
+              Home
+            </Link>
             <ChevronRight size={14} className="text-lotus-text-muted" />
-            <Link to={`/service/${providerId}`} className="text-lotus-text-muted hover:text-sage transition-colors">{provider.name}</Link>
+            <Link
+              to={`/service/${providerId}`}
+              className="text-lotus-text-muted hover:text-sage transition-colors"
+            >
+              {provider.name}
+            </Link>
             <ChevronRight size={14} className="text-lotus-text-muted" />
             <span className="text-sage-dark font-medium">Book</span>
           </nav>
@@ -84,23 +175,27 @@ const BookingFlowPage = () => {
                       currentStep > step.number
                         ? 'stepper-complete'
                         : currentStep === step.number
-                          ? 'stepper-active'
-                          : 'stepper-inactive'
+                        ? 'stepper-active'
+                        : 'stepper-inactive'
                     }`}
                     data-testid={`step-indicator-${step.number}`}
                   >
                     {currentStep > step.number ? <Check size={18} /> : step.number}
                   </div>
-                  <span className={`text-sm font-medium hidden sm:block ${
-                    currentStep >= step.number ? 'text-sage-dark' : 'text-lotus-text-muted'
-                  }`}>
+                  <span
+                    className={`text-sm font-medium hidden sm:block ${
+                      currentStep >= step.number ? 'text-sage-dark' : 'text-lotus-text-muted'
+                    }`}
+                  >
                     {step.title}
                   </span>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`w-12 sm:w-24 h-0.5 mx-3 ${
-                    currentStep > step.number ? 'stepper-line-active' : 'stepper-line-inactive'
-                  }`}></div>
+                  <div
+                    className={`w-12 sm:w-24 h-0.5 mx-3 ${
+                      currentStep > step.number ? 'stepper-line-active' : 'stepper-line-inactive'
+                    }`}
+                  ></div>
                 )}
               </React.Fragment>
             ))}
@@ -114,8 +209,10 @@ const BookingFlowPage = () => {
           {currentStep === 1 && (
             <div className="space-y-6" data-testid="step-1-content">
               <div className="card-lotus p-6 lg:p-8">
-                <h2 className="font-serif text-xl font-medium text-sage-dark mb-6">Confirm Your Service</h2>
-                
+                <h2 className="font-serif text-xl font-medium text-sage-dark mb-6">
+                  Confirm Your Service
+                </h2>
+
                 {/* Provider Summary */}
                 <div className="flex items-center gap-4 p-4 bg-sage-pale/30 rounded-xl mb-6">
                   <div className="w-14 h-14 avatar-circle avatar-sage">{provider.avatar}</div>
@@ -129,9 +226,11 @@ const BookingFlowPage = () => {
                 <div className="p-4 border-2 border-sage rounded-xl mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-medium text-sage-dark">{selectedPackage.name}</span>
-                    <span className="price-highlight text-lg">₹{selectedPackage.price}</span>
+                    <span className="price-highlight text-lg">€{selectedPackage.price}</span>
                   </div>
-                  <p className="text-sm text-lotus-text-muted">{selectedPackage.hours} of care included</p>
+                  <p className="text-sm text-lotus-text-muted">
+                    {selectedPackage.hours} of care included
+                  </p>
                 </div>
 
                 {/* Special Notes */}
@@ -161,7 +260,9 @@ const BookingFlowPage = () => {
           {currentStep === 2 && (
             <div className="space-y-6" data-testid="step-2-content">
               <div className="card-lotus p-6 lg:p-8">
-                <h2 className="font-serif text-xl font-medium text-sage-dark mb-6">Choose Date & Time</h2>
+                <h2 className="font-serif text-xl font-medium text-sage-dark mb-6">
+                  Choose Date & Time
+                </h2>
 
                 {/* Date Selection */}
                 <div className="mb-6">
@@ -202,7 +303,9 @@ const BookingFlowPage = () => {
 
                 {/* Recurring Options */}
                 <div className="mb-6">
-                  <label className="text-sm font-medium text-sage-dark block mb-3">Booking Type</label>
+                  <label className="text-sm font-medium text-sage-dark block mb-3">
+                    Booking Type
+                  </label>
                   <div className="grid grid-cols-3 gap-3">
                     {[
                       { value: 'one-time', label: 'One-time' },
@@ -288,7 +391,9 @@ const BookingFlowPage = () => {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-lotus-text-muted">Date & Time</span>
-                    <span className="text-sage-dark">{formData.date || 'Not selected'} at {formData.time || 'Not selected'}</span>
+                    <span className="text-sage-dark">
+                      {formData.date || 'Not selected'} at {formData.time || 'Not selected'}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-lotus-text-muted">Duration</span>
@@ -313,7 +418,10 @@ const BookingFlowPage = () => {
                 {/* Promo Code */}
                 <div className="flex gap-2 mb-6">
                   <div className="flex-1 relative">
-                    <Tag size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-lotus-text-muted" />
+                    <Tag
+                      size={16}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-lotus-text-muted"
+                    />
                     <input
                       type="text"
                       className="input-lotus pl-10"
@@ -323,7 +431,13 @@ const BookingFlowPage = () => {
                       data-testid="promo-code-input"
                     />
                   </div>
-                  <button className="btn-outline" data-testid="apply-promo-btn">Apply</button>
+                  <button
+                    className="btn-outline"
+                    data-testid="apply-promo-btn"
+                    onClick={() => console.log('Apply promo:', formData.promoCode)}
+                  >
+                    Apply
+                  </button>
                 </div>
               </div>
 
@@ -334,9 +448,19 @@ const BookingFlowPage = () => {
                 <div className="space-y-3">
                   {[
                     { value: 'ideal', label: 'iDEAL', icon: Building2, desc: 'Dutch bank transfer' },
-                    { value: 'card', label: 'Credit/Debit Card', icon: CreditCard, desc: 'Visa, Mastercard, Maestro' },
+                    {
+                      value: 'card',
+                      label: 'Credit/Debit Card',
+                      icon: CreditCard,
+                      desc: 'Visa, Mastercard, Maestro',
+                    },
                     { value: 'upi', label: 'UPI', icon: Smartphone, desc: 'Pay using any UPI app' },
-                    { value: 'bancontact', label: 'Bancontact', icon: Wallet, desc: 'Belgium & Netherlands' },
+                    {
+                      value: 'bancontact',
+                      label: 'Bancontact',
+                      icon: Wallet,
+                      desc: 'Belgium & Netherlands',
+                    },
                   ].map((method) => (
                     <button
                       key={method.value}
@@ -355,10 +479,16 @@ const BookingFlowPage = () => {
                         <p className="font-medium text-sage-dark">{method.label}</p>
                         <p className="text-xs text-lotus-text-muted">{method.desc}</p>
                       </div>
-                      <div className={`ml-auto w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        formData.paymentMethod === method.value ? 'border-sage bg-sage' : 'border-lotus-border'
-                      }`}>
-                        {formData.paymentMethod === method.value && <Check size={12} className="text-white" />}
+                      <div
+                        className={`ml-auto w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                          formData.paymentMethod === method.value
+                            ? 'border-sage bg-sage'
+                            : 'border-lotus-border'
+                        }`}
+                      >
+                        {formData.paymentMethod === method.value && (
+                          <Check size={12} className="text-white" />
+                        )}
                       </div>
                     </button>
                   ))}
@@ -385,7 +515,11 @@ const BookingFlowPage = () => {
                 <button className="btn-outline" onClick={handleBack} data-testid="back-btn">
                   Back
                 </button>
-                <button className="btn-primary" data-testid="confirm-booking-btn">
+                <button
+                  className="btn-primary"
+                  data-testid="confirm-booking-btn"
+                  onClick={handleConfirmBooking}
+                >
                   Confirm Booking — €{selectedPackage.price + 5}
                 </button>
               </div>

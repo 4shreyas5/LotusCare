@@ -1,146 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Check, Shield, Star, ChevronRight, ArrowRight, Quote } from 'lucide-react';
-
-// Mock data for providers
-const featuredProviders = [
-  {
-    id: 1,
-    name: 'Priya S.',
-    avatar: 'PS',
-    title: 'Compassionate in-home nursing for post-surgery recovery',
-    category: 'Healthcare',
-    badge: 'Top Rated',
-    badgeColor: 'bg-gold/20 text-gold',
-    rating: 5,
-    reviews: 312,
-    price: '€28',
-    priceUnit: '/hr',
-    emoji: '🧑‍⚕️',
-    bgColor: 'bg-sage-pale',
-    location: 'Mumbai',
-  },
-  {
-    id: 2,
-    name: 'Anna V.',
-    avatar: 'AV',
-    title: 'Specialized dementia and Alzheimer\'s daily care support',
-    category: 'Medical',
-    badge: 'Medical',
-    badgeColor: 'bg-blue-100 text-blue-700',
-    rating: 5,
-    reviews: 204,
-    price: '€32',
-    priceUnit: '/hr',
-    emoji: '👩‍🦳',
-    bgColor: 'bg-blush-light',
-    location: 'Amsterdam',
-  },
-  {
-    id: 3,
-    name: 'Sophie M.',
-    avatar: 'SM',
-    title: 'Full-home cleaning, organizing, and grocery assistance',
-    category: 'Home',
-    badge: 'New',
-    badgeColor: 'bg-sage/10 text-sage',
-    rating: 4,
-    reviews: 88,
-    price: '€22',
-    priceUnit: '/hr',
-    emoji: '🏠',
-    bgColor: 'bg-blue-50',
-    location: 'Rotterdam',
-  },
-  {
-    id: 4,
-    name: 'Arjun P.',
-    avatar: 'AP',
-    title: 'Anxiety, grief, and life-transition counseling sessions',
-    category: 'Counselor',
-    badge: 'Counselor',
-    badgeColor: 'bg-purple-100 text-purple-700',
-    rating: 5,
-    reviews: 176,
-    price: '€55',
-    priceUnit: '/session',
-    emoji: '💆',
-    bgColor: 'bg-purple-50',
-    location: 'Delhi',
-  },
-];
-
-const categories = [
-  {
-    id: 1,
-    title: 'Healthcare Support',
-    description: 'Professional medical care at home — from nursing to rehabilitation.',
-    icon: '🏥',
-    tags: ['Elderly care', 'Post-surgery', 'Dementia care', 'ICU support'],
-    providers: '240+',
-    link: '/category/healthcare',
-    gradient: 'category-healthcare',
-  },
-  {
-    id: 2,
-    title: 'Home Support',
-    description: 'Trusted help for daily household tasks and family needs.',
-    icon: '🏡',
-    tags: ['Cleaning', 'Cooking', 'Grocery runs', 'Childminding'],
-    providers: '185+',
-    link: '/category/home-support',
-    gradient: 'category-home',
-  },
-  {
-    id: 3,
-    title: 'Personal Support',
-    description: 'Emotional wellness, companionship, and guidance when you need it.',
-    icon: '💬',
-    tags: ['Counseling', 'Life coaching', 'Companionship', 'Grief support'],
-    providers: '120+',
-    link: '/category/personal-support',
-    gradient: 'category-personal',
-  },
-];
-
-const quickFilters = ['Elderly Care', 'Post-Surgery Nurse', 'House Cleaning', 'Counseling', 'Child Care', 'Companion'];
-
-const howItWorks = [
-  { step: 1, title: 'Describe your needs', desc: 'Tell us about the care you\'re looking for and any specific requirements.' },
-  { step: 2, title: 'Browse matched providers', desc: 'Review verified profiles, ratings, and reviews of caregivers who fit your needs.' },
-  { step: 3, title: 'Connect & confirm', desc: 'Message providers, discuss details, and book with confidence.' },
-  { step: 4, title: 'Ongoing support', desc: 'Receive quality care with our satisfaction guarantee and 24/7 support.' },
-];
-
-const testimonials = [
-  {
-    id: 1,
-    quote: 'After my mother\'s hip surgery, finding reliable nursing care felt overwhelming. Lotus Care matched us with Priya within hours. She became part of our family.',
-    author: 'Vikram Mehta',
-    role: 'Son & Family Caregiver',
-    city: 'Mumbai',
-    avatar: 'VM',
-    avatarColor: 'avatar-sage',
-  },
-  {
-    id: 2,
-    quote: 'Als werkende ouders hadden we iemand nodig die we konden vertrouwen. De grondige achtergrondcontroles gaven ons de gemoedsrust die we elders niet vonden.',
-    author: 'Emma de Vries',
-    role: 'Working Parent',
-    city: 'Amsterdam',
-    avatar: 'EV',
-    avatarColor: 'avatar-blush',
-  },
-  {
-    id: 3,
-    quote: 'The grief counseling I found through Lotus Care helped me navigate the hardest year of my life. Professional, compassionate, and truly life-changing.',
-    author: 'Jan van der Berg',
-    role: 'Individual Client',
-    city: 'Utrecht',
-    avatar: 'JB',
-    avatarColor: 'avatar-lavender',
-  },
-];
+import { Check, Shield, Star, ChevronRight, ArrowRight } from 'lucide-react';
+import {
+  featuredProviders,
+  categories,
+  quickFilters,
+  howItWorks,
+  testimonials,
+} from '../data/homeData';
 
 const HomePage = () => {
   return (
@@ -154,7 +21,9 @@ const HomePage = () => {
               {/* Eyebrow Badge */}
               <div className="inline-flex items-center gap-2 bg-sage-pale rounded-pill px-4 py-2">
                 <span className="w-2 h-2 bg-sage rounded-full animate-pulse"></span>
-                <span className="text-sm font-medium text-sage">Trusted by 40,000+ families across India & Europe</span>
+                <span className="text-sm font-medium text-sage">
+                  Trusted by 40,000+ families across India & Europe
+                </span>
               </div>
 
               {/* Headline */}
@@ -164,7 +33,7 @@ const HomePage = () => {
 
               {/* Subheadline */}
               <p className="text-lg text-lotus-text-mid leading-relaxed max-w-lg">
-                Find verified nurses, caregivers, home helpers, and counselors — handpicked, 
+                Find verified nurses, caregivers, home helpers, and counselors — handpicked,
                 background-checked, and ready to help when you need it most.
               </p>
 
@@ -176,7 +45,7 @@ const HomePage = () => {
                   className="w-full rounded-pill border-2 border-lotus-border bg-white pl-5 pr-36 py-4 text-base text-sage-dark placeholder-lotus-text-muted focus:border-sage focus:outline-none focus:ring-4 focus:ring-sage/10 transition-all"
                   data-testid="hero-search-input"
                 />
-                <button 
+                <button
                   className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary py-2.5 px-6"
                   data-testid="hero-search-btn"
                 >
@@ -222,7 +91,10 @@ const HomePage = () => {
             {/* Right - Floating Cards */}
             <div className="relative hidden lg:block h-[500px]">
               {/* Main Provider Card */}
-              <div className="absolute top-8 left-0 card-lotus p-5 w-72 float-animation" data-testid="hero-provider-card">
+              <div
+                className="absolute top-8 left-0 card-lotus p-5 w-72 float-animation"
+                data-testid="hero-provider-card"
+              >
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 avatar-circle avatar-sage text-lg">PS</div>
                   <div className="flex-1">
@@ -241,7 +113,10 @@ const HomePage = () => {
               </div>
 
               {/* Booking Confirmed Card */}
-              <div className="absolute top-4 right-0 card-lotus p-4 w-64 float-animation-delayed" data-testid="hero-booking-card">
+              <div
+                className="absolute top-4 right-0 card-lotus p-4 w-64 float-animation-delayed"
+                data-testid="hero-booking-card"
+              >
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-2 h-2 bg-sage rounded-full"></span>
                   <span className="text-sm font-medium text-sage">Booking confirmed</span>
@@ -255,7 +130,10 @@ const HomePage = () => {
               </div>
 
               {/* Matched Card */}
-              <div className="absolute bottom-16 left-8 card-lotus p-4 w-56 float-animation-delayed-2" data-testid="hero-matched-card">
+              <div
+                className="absolute bottom-16 left-8 card-lotus p-4 w-56 float-animation-delayed-2"
+                data-testid="hero-matched-card"
+              >
                 <p className="text-xs text-lotus-text-muted mb-2">Matched for you</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 avatar-circle avatar-blush text-sm">MR</div>
@@ -304,7 +182,10 @@ const HomePage = () => {
 
                 <div className="flex flex-wrap gap-2">
                   {category.tags.map((tag) => (
-                    <span key={tag} className="bg-white/60 backdrop-blur-sm rounded-pill px-3 py-1 text-xs text-sage-dark">
+                    <span
+                      key={tag}
+                      className="bg-white/60 backdrop-blur-sm rounded-pill px-3 py-1 text-xs text-sage-dark"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -327,7 +208,11 @@ const HomePage = () => {
               <span className="label-overline">Featured Providers</span>
               <h2 className="heading-section mt-3">Trusted by families like yours</h2>
             </div>
-            <Link to="/category/healthcare" className="btn-outline text-sm" data-testid="view-all-providers-btn">
+            <Link
+              to="/category/healthcare"
+              className="btn-outline text-sm"
+              data-testid="view-all-providers-btn"
+            >
               View all providers
             </Link>
           </div>
@@ -341,9 +226,13 @@ const HomePage = () => {
                 data-testid={`provider-card-${provider.id}`}
               >
                 {/* Image Area */}
-                <div className={`${provider.bgColor} h-40 flex items-center justify-center relative`}>
+                <div
+                  className={`${provider.bgColor} h-40 flex items-center justify-center relative`}
+                >
                   <span className="text-6xl">{provider.emoji}</span>
-                  <span className={`absolute top-3 right-3 ${provider.badgeColor} rounded-pill px-2.5 py-1 text-xs font-medium`}>
+                  <span
+                    className={`absolute top-3 right-3 ${provider.badgeColor} rounded-pill px-2.5 py-1 text-xs font-medium`}
+                  >
                     {provider.badge}
                   </span>
                 </div>
@@ -351,7 +240,9 @@ const HomePage = () => {
                 {/* Content */}
                 <div className="p-5">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 avatar-circle avatar-sage text-sm">{provider.avatar}</div>
+                    <div className="w-10 h-10 avatar-circle avatar-sage text-sm">
+                      {provider.avatar}
+                    </div>
                     <div>
                       <p className="font-medium text-sage-dark text-sm">{provider.name}</p>
                       <span className="badge-sage text-[10px]">✓ Verified</span>
@@ -365,16 +256,17 @@ const HomePage = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          size={12} 
-                          className={i < provider.rating ? 'text-gold fill-gold' : 'text-lotus-border'} 
+                        <Star
+                          key={i}
+                          size={12}
+                          className={i < provider.rating ? 'text-gold fill-gold' : 'text-lotus-border'}
                         />
                       ))}
                       <span className="text-xs text-lotus-text-muted ml-1">({provider.reviews})</span>
                     </div>
                     <p className="price-highlight text-sm">
-                      {provider.price}<span className="text-lotus-text-muted font-normal">{provider.priceUnit}</span>
+                      {provider.price}
+                      <span className="text-lotus-text-muted font-normal">{provider.priceUnit}</span>
                     </p>
                   </div>
                 </div>
@@ -389,19 +281,27 @@ const HomePage = () => {
         <div className="section-container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div>
-              <p className="font-serif text-4xl lg:text-5xl font-medium text-white">40K<span className="text-blush">+</span></p>
+              <p className="font-serif text-4xl lg:text-5xl font-medium text-white">
+                40K<span className="text-blush">+</span>
+              </p>
               <p className="text-white/70 text-sm mt-2">Families served</p>
             </div>
             <div>
-              <p className="font-serif text-4xl lg:text-5xl font-medium text-white">4.9<span className="text-blush">★</span></p>
+              <p className="font-serif text-4xl lg:text-5xl font-medium text-white">
+                4.9<span className="text-blush">★</span>
+              </p>
               <p className="text-white/70 text-sm mt-2">Average provider rating</p>
             </div>
             <div>
-              <p className="font-serif text-4xl lg:text-5xl font-medium text-white">545<span className="text-blush">+</span></p>
+              <p className="font-serif text-4xl lg:text-5xl font-medium text-white">
+                545<span className="text-blush">+</span>
+              </p>
               <p className="text-white/70 text-sm mt-2">Verified caregivers</p>
             </div>
             <div>
-              <p className="font-serif text-4xl lg:text-5xl font-medium text-white">98<span className="text-blush">%</span></p>
+              <p className="font-serif text-4xl lg:text-5xl font-medium text-white">
+                98<span className="text-blush">%</span>
+              </p>
               <p className="text-white/70 text-sm mt-2">Satisfaction rate</p>
             </div>
           </div>
@@ -439,7 +339,11 @@ const HomePage = () => {
 
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="card-lotus p-8 relative" data-testid={`testimonial-${testimonial.id}`}>
+              <div
+                key={testimonial.id}
+                className="card-lotus p-8 relative"
+                data-testid={`testimonial-${testimonial.id}`}
+              >
                 <span className="quote-mark">"</span>
                 <p className="font-serif text-lg italic text-lotus-text-mid leading-relaxed mb-6 relative z-10">
                   "{testimonial.quote}"
@@ -450,7 +354,9 @@ const HomePage = () => {
                   </div>
                   <div>
                     <p className="font-medium text-sage-dark">{testimonial.author}</p>
-                    <p className="text-sm text-lotus-text-muted">{testimonial.role}, {testimonial.city}</p>
+                    <p className="text-sm text-lotus-text-muted">
+                      {testimonial.role}, {testimonial.city}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1 mt-4">
@@ -472,11 +378,16 @@ const HomePage = () => {
               <div>
                 <h3 className="heading-section mb-4">Are you a caregiver, nurse, or counselor?</h3>
                 <p className="text-body mb-6">
-                  Join India's fastest-growing care marketplace. Set your own schedule, 
-                  connect with families who need you, and grow your practice.
+                  Join India's fastest-growing care marketplace. Set your own schedule, connect with
+                  families who need you, and grow your practice.
                 </p>
                 <div className="flex flex-wrap gap-3 mb-8">
-                  {['Free to join', 'Instant payouts', 'You set your schedule', 'Liability insurance included'].map((perk) => (
+                  {[
+                    'Free to join',
+                    'Instant payouts',
+                    'You set your schedule',
+                    'Liability insurance included',
+                  ].map((perk) => (
                     <span key={perk} className="badge-sage">
                       <Check size={14} className="mr-1" /> {perk}
                     </span>
@@ -484,10 +395,18 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
-                <button className="btn-primary" data-testid="become-provider-btn">
+                <button
+                  className="btn-primary"
+                  data-testid="become-provider-btn"
+                  onClick={() => console.log('Become a Provider clicked')}
+                >
                   Become a Provider
                 </button>
-                <button className="btn-outline" data-testid="learn-more-btn">
+                <button
+                  className="btn-outline"
+                  data-testid="learn-more-btn"
+                  onClick={() => console.log('Learn more clicked')}
+                >
                   Learn more <ArrowRight size={16} className="ml-2" />
                 </button>
               </div>
@@ -501,14 +420,22 @@ const HomePage = () => {
         <div className="section-container text-center">
           <h2 className="heading-section mb-4">Your family deserves the very best care</h2>
           <p className="text-body max-w-2xl mx-auto mb-8">
-            Whether you need medical support, help around the house, or someone to talk to — 
-            we're here to connect you with trusted, verified caregivers.
+            Whether you need medical support, help around the house, or someone to talk to — we're
+            here to connect you with trusted, verified caregivers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/category/healthcare" className="btn-primary" data-testid="final-cta-find-btn">
+            <Link
+              to="/category/healthcare"
+              className="btn-primary"
+              data-testid="final-cta-find-btn"
+            >
               Find a Caregiver Today
             </Link>
-            <Link to="/category/healthcare" className="btn-outline" data-testid="final-cta-browse-btn">
+            <Link
+              to="/category/healthcare"
+              className="btn-outline"
+              data-testid="final-cta-browse-btn"
+            >
               Browse All Services
             </Link>
           </div>

@@ -1,213 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ChevronRight, Star, Check, SlidersHorizontal, X, MapPin } from 'lucide-react';
-
-// Category data
-const categoryData = {
-  healthcare: {
-    title: 'Healthcare Support',
-    description: 'Professional medical care at home — from nursing to rehabilitation, palliative care to post-surgery support.',
-    icon: '🏥',
-    providers: 240,
-  },
-  'home-support': {
-    title: 'Home Support',
-    description: 'Trusted help for daily household tasks and family needs — cleaning, cooking, childcare, and more.',
-    icon: '🏡',
-    providers: 185,
-  },
-  'personal-support': {
-    title: 'Personal Support',
-    description: 'Emotional wellness, companionship, and professional guidance when you need it most.',
-    icon: '💬',
-    providers: 120,
-  },
-};
-
-// Mock providers data
-const allProviders = [
-  {
-    id: 1,
-    name: 'Priya Sharma',
-    avatar: 'PS',
-    title: 'Compassionate in-home nursing for post-surgery recovery',
-    category: 'healthcare',
-    specialization: 'Post-Surgery Care',
-    experience: '8 years',
-    rating: 5,
-    reviews: 312,
-    price: 28,
-    priceUnit: '/hr',
-    location: 'Mumbai',
-    verified: true,
-    topRated: true,
-    available: 'Today',
-  },
-  {
-    id: 2,
-    name: 'Anna van Dijk',
-    avatar: 'AD',
-    title: 'Specialized dementia and Alzheimer\'s daily care support',
-    category: 'healthcare',
-    specialization: 'Elderly Care',
-    experience: '12 years',
-    rating: 5,
-    reviews: 204,
-    price: 35,
-    priceUnit: '/hr',
-    location: 'Amsterdam',
-    verified: true,
-    topRated: true,
-    available: 'This week',
-  },
-  {
-    id: 3,
-    name: 'Rajesh Kumar',
-    avatar: 'RK',
-    title: 'Expert physiotherapy and rehabilitation services at home',
-    category: 'healthcare',
-    specialization: 'Physiotherapy',
-    experience: '6 years',
-    rating: 4,
-    reviews: 156,
-    price: 30,
-    priceUnit: '/hr',
-    location: 'Delhi',
-    verified: true,
-    topRated: false,
-    available: 'Today',
-  },
-  {
-    id: 4,
-    name: 'Maria de Jong',
-    avatar: 'MJ',
-    title: 'Palliative care specialist with compassionate approach',
-    category: 'healthcare',
-    specialization: 'Palliative Care',
-    experience: '15 years',
-    rating: 5,
-    reviews: 89,
-    price: 40,
-    priceUnit: '/hr',
-    location: 'Rotterdam',
-    verified: true,
-    topRated: true,
-    available: 'Weekends',
-  },
-  {
-    id: 5,
-    name: 'Sophie Bakker',
-    avatar: 'SB',
-    title: 'Full-home cleaning, organizing, and grocery assistance',
-    category: 'home-support',
-    specialization: 'House Cleaning',
-    experience: '5 years',
-    rating: 4,
-    reviews: 88,
-    price: 22,
-    priceUnit: '/hr',
-    location: 'Utrecht',
-    verified: true,
-    topRated: false,
-    available: 'Today',
-  },
-  {
-    id: 6,
-    name: 'Geeta Devi',
-    avatar: 'GD',
-    title: 'Professional cook specializing in healthy home meals',
-    category: 'home-support',
-    specialization: 'Cooking',
-    experience: '10 years',
-    rating: 5,
-    reviews: 234,
-    price: 25,
-    priceUnit: '/hr',
-    location: 'Bangalore',
-    verified: true,
-    topRated: true,
-    available: 'This week',
-  },
-  {
-    id: 7,
-    name: 'Lisa Jansen',
-    avatar: 'LJ',
-    title: 'Experienced nanny and childcare specialist',
-    category: 'home-support',
-    specialization: 'Childcare',
-    experience: '8 years',
-    rating: 5,
-    reviews: 178,
-    price: 28,
-    priceUnit: '/hr',
-    location: 'The Hague',
-    verified: true,
-    topRated: true,
-    available: 'Today',
-  },
-  {
-    id: 8,
-    name: 'Arjun Patel',
-    avatar: 'AP',
-    title: 'Anxiety, grief, and life-transition counseling sessions',
-    category: 'personal-support',
-    specialization: 'Counseling',
-    experience: '7 years',
-    rating: 5,
-    reviews: 176,
-    price: 55,
-    priceUnit: '/session',
-    location: 'Mumbai',
-    verified: true,
-    topRated: true,
-    available: 'Today',
-  },
-  {
-    id: 9,
-    name: 'Dr. Eva Visser',
-    avatar: 'EV',
-    title: 'Licensed therapist for family and relationship counseling',
-    category: 'personal-support',
-    specialization: 'Family Therapy',
-    experience: '10 years',
-    rating: 5,
-    reviews: 145,
-    price: 65,
-    priceUnit: '/session',
-    location: 'Amsterdam',
-    verified: true,
-    topRated: true,
-    available: 'This week',
-  },
-  {
-    id: 10,
-    name: 'Pieter Smit',
-    avatar: 'PS',
-    title: 'Friendly companion for elderly - walks, conversations, activities',
-    category: 'personal-support',
-    specialization: 'Companionship',
-    experience: '4 years',
-    rating: 4,
-    reviews: 92,
-    price: 20,
-    priceUnit: '/hr',
-    location: 'Eindhoven',
-    verified: true,
-    topRated: false,
-    available: 'Weekends',
-  },
-];
-
-const specializations = {
-  healthcare: ['Elderly Care', 'Post-Surgery', 'Dementia Care', 'ICU Support', 'Physiotherapy', 'Palliative Care'],
-  'home-support': ['House Cleaning', 'Cooking', 'Childcare', 'Grocery Runs', 'Laundry', 'Pet Care'],
-  'personal-support': ['Counseling', 'Life Coaching', 'Companionship', 'Grief Support', 'Family Therapy'],
-};
+import { categoryData, specializations } from '../data/homeData';
+import { allProviders } from '../data/providers';
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
   const category = categoryData[categoryId] || categoryData.healthcare;
-  
+
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState('relevant');
   const [filters, setFilters] = useState({
@@ -221,7 +21,7 @@ const CategoryPage = () => {
   });
 
   // Filter providers
-  const filteredProviders = allProviders.filter(p => p.category === categoryId);
+  const filteredProviders = allProviders.filter((p) => p.category === categoryId);
 
   // Sort providers
   const sortedProviders = [...filteredProviders].sort((a, b) => {
@@ -243,7 +43,11 @@ const CategoryPage = () => {
       <div className="bg-warm-white border-b border-lotus-border">
         <div className="section-container py-4">
           <nav className="flex items-center gap-2 text-sm">
-            <Link to="/" className="text-lotus-text-muted hover:text-sage transition-colors" data-testid="breadcrumb-home">
+            <Link
+              to="/"
+              className="text-lotus-text-muted hover:text-sage transition-colors"
+              data-testid="breadcrumb-home"
+            >
               Home
             </Link>
             <ChevronRight size={14} className="text-lotus-text-muted" />
@@ -272,17 +76,19 @@ const CategoryPage = () => {
           <aside className="hidden lg:block w-64 flex-shrink-0" data-testid="filters-sidebar">
             <div className="card-lotus p-6 sticky top-24">
               <h3 className="font-serif text-lg font-medium text-sage-dark mb-6">Filters</h3>
-              
+
               {/* Price Range */}
               <div className="filter-section">
-                <label className="text-sm font-medium text-sage-dark block mb-3">Price Range (₹/hr)</label>
+                <label className="text-sm font-medium text-sage-dark block mb-3">
+                  Price Range (€/hr)
+                </label>
                 <div className="flex gap-2">
                   <input
                     type="number"
                     placeholder="Min"
                     className="input-lotus text-sm py-2"
                     value={filters.priceMin}
-                    onChange={(e) => setFilters({...filters, priceMin: e.target.value})}
+                    onChange={(e) => setFilters({ ...filters, priceMin: e.target.value })}
                     data-testid="filter-price-min"
                   />
                   <input
@@ -290,7 +96,7 @@ const CategoryPage = () => {
                     placeholder="Max"
                     className="input-lotus text-sm py-2"
                     value={filters.priceMax}
-                    onChange={(e) => setFilters({...filters, priceMax: e.target.value})}
+                    onChange={(e) => setFilters({ ...filters, priceMax: e.target.value })}
                     data-testid="filter-price-max"
                   />
                 </div>
@@ -315,7 +121,9 @@ const CategoryPage = () => {
 
               {/* Experience Level */}
               <div className="filter-section">
-                <label className="text-sm font-medium text-sage-dark block mb-3">Experience Level</label>
+                <label className="text-sm font-medium text-sage-dark block mb-3">
+                  Experience Level
+                </label>
                 <div className="space-y-2">
                   {['Junior (1-3 yrs)', 'Senior (4-7 yrs)', 'Expert (8+ yrs)'].map((option) => (
                     <label key={option} className="flex items-center gap-2 cursor-pointer">
@@ -365,7 +173,11 @@ const CategoryPage = () => {
                 </div>
               </div>
 
-              <button className="btn-primary w-full mt-4 text-sm" data-testid="apply-filters-btn">
+              <button
+                className="btn-primary w-full mt-4 text-sm"
+                data-testid="apply-filters-btn"
+                onClick={() => console.log('Filters applied:', filters)}
+              >
                 Apply Filters
               </button>
             </div>
@@ -382,8 +194,11 @@ const CategoryPage = () => {
 
           {/* Mobile Filter Modal */}
           {showFilters && (
-            <div className="lg:hidden fixed inset-0 z-50 bg-black/50" onClick={() => setShowFilters(false)}>
-              <div 
+            <div
+              className="lg:hidden fixed inset-0 z-50 bg-black/50"
+              onClick={() => setShowFilters(false)}
+            >
+              <div
                 className="absolute right-0 top-0 bottom-0 w-80 bg-warm-white p-6 overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -393,8 +208,10 @@ const CategoryPage = () => {
                     <X size={24} className="text-lotus-text-mid" />
                   </button>
                 </div>
-                {/* Same filter content as desktop */}
-                <button className="btn-primary w-full mt-4" onClick={() => setShowFilters(false)}>
+                <button
+                  className="btn-primary w-full mt-4"
+                  onClick={() => setShowFilters(false)}
+                >
                   Apply Filters
                 </button>
               </div>
@@ -406,7 +223,8 @@ const CategoryPage = () => {
             {/* Sort Bar */}
             <div className="flex items-center justify-between mb-6">
               <p className="text-sm text-lotus-text-muted">
-                <span className="font-medium text-sage-dark">{sortedProviders.length}</span> providers found
+                <span className="font-medium text-sage-dark">{sortedProviders.length}</span> providers
+                found
               </p>
               <div className="flex items-center gap-3">
                 <label className="text-sm text-lotus-text-muted">Sort by:</label>
@@ -455,7 +273,7 @@ const CategoryPage = () => {
                     <div className="flex items-center gap-2 mb-2">
                       <h3 className="font-serif font-medium text-sage-dark">{provider.name}</h3>
                     </div>
-                    
+
                     <p className="text-sm text-lotus-text-mid line-clamp-2 mb-3 min-h-[40px]">
                       {provider.title}
                     </p>
@@ -470,16 +288,19 @@ const CategoryPage = () => {
                     <div className="flex items-center justify-between pt-3 border-t border-lotus-border">
                       <div className="flex items-center gap-1">
                         {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            size={12} 
-                            className={i < provider.rating ? 'text-gold fill-gold' : 'text-lotus-border'} 
+                          <Star
+                            key={i}
+                            size={12}
+                            className={i < provider.rating ? 'text-gold fill-gold' : 'text-lotus-border'}
                           />
                         ))}
                         <span className="text-xs text-lotus-text-muted ml-1">({provider.reviews})</span>
                       </div>
                       <p className="price-highlight text-sm">
-                        €{provider.price}<span className="text-lotus-text-muted font-normal text-xs">{provider.priceUnit}</span>
+                        €{provider.price}
+                        <span className="text-lotus-text-muted font-normal text-xs">
+                          {provider.priceUnit}
+                        </span>
                       </p>
                     </div>
                   </div>
@@ -489,15 +310,18 @@ const CategoryPage = () => {
 
             {/* Pagination */}
             <div className="flex items-center justify-center gap-2 mt-10">
-              <button className="w-10 h-10 rounded-full border border-lotus-border text-lotus-text-muted hover:border-sage hover:text-sage transition-colors" data-testid="pagination-prev">
+              <button
+                className="w-10 h-10 rounded-full border border-lotus-border text-lotus-text-muted hover:border-sage hover:text-sage transition-colors"
+                data-testid="pagination-prev"
+              >
                 ‹
               </button>
               {[1, 2, 3, 4, 5].map((page) => (
                 <button
                   key={page}
                   className={`w-10 h-10 rounded-full font-medium transition-colors ${
-                    page === 1 
-                      ? 'bg-sage text-white' 
+                    page === 1
+                      ? 'bg-sage text-white'
                       : 'border border-lotus-border text-lotus-text-muted hover:border-sage hover:text-sage'
                   }`}
                   data-testid={`pagination-${page}`}
@@ -505,7 +329,10 @@ const CategoryPage = () => {
                   {page}
                 </button>
               ))}
-              <button className="w-10 h-10 rounded-full border border-lotus-border text-lotus-text-muted hover:border-sage hover:text-sage transition-colors" data-testid="pagination-next">
+              <button
+                className="w-10 h-10 rounded-full border border-lotus-border text-lotus-text-muted hover:border-sage hover:text-sage transition-colors"
+                data-testid="pagination-next"
+              >
                 ›
               </button>
             </div>

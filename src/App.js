@@ -1,16 +1,16 @@
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Layout Components
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 // Page Components
-import HomePage from "./pages/HomePage";
-import CategoryPage from "./pages/CategoryPage";
-import ServiceListingPage from "./pages/ServiceListingPage";
-import ProviderProfilePage from "./pages/ProviderProfilePage";
-import BookingFlowPage from "./pages/BookingFlowPage";
+import HomePage from './pages/HomePage';
+import CategoryPage from './pages/CategoryPage';
+import ServiceListingPage from './pages/ServiceListingPage';
+import ProviderProfilePage from './pages/ProviderProfilePage';
+import BookingFlowPage from './pages/BookingFlowPage';
 
 // Layout wrapper with Navbar and Footer
 const Layout = ({ children }) => {
