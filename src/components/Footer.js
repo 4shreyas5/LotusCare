@@ -26,6 +26,7 @@ const Footer = () => {
     ],
   };
 
+  const certifications = [  ];
 
   return (
     <footer className="bg-lotus-text-dark text-white" data-testid="footer">
@@ -109,7 +110,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-white/50">
-            © 2026 Lotus Care. All rights reserved.
+            © 2025 Lotus Care. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             {certifications.map((cert) => (
