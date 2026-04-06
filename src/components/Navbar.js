@@ -49,12 +49,6 @@ const Navbar = () => {
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-4">
-            <button 
-              className="btn-ghost text-sm"
-              data-testid="sign-in-btn"
-            >
-              Sign in
-            </button>
             <Link 
               to="/category/healthcare" 
               className="btn-primary text-sm"
