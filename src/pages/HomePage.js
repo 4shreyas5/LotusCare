@@ -4,12 +4,30 @@ import { Check, Shield, Star, ChevronRight, ArrowRight } from 'lucide-react';
 import {
   featuredProviders,
   categories,
-  quickFilters,
   howItWorks,
   testimonials,
 } from '../data/homeData';
+import { useLanguage } from '../lib/LanguageContext';
 
 const HomePage = () => {
+  const { t } = useLanguage();
+
+  // Translated versions of data-driven arrays
+  const translatedQuickFilters = t('quickFilters');
+
+  const translatedCategories = categories.map((cat, i) => ({
+    ...cat,
+    title: t(`cat${i + 1}_title`),
+    description: t(`cat${i + 1}_desc`),
+    tags: t(`cat${i + 1}_tags`),
+  }));
+
+  const translatedHowItWorks = howItWorks.map((item) => ({
+    ...item,
+    title: t(`how_step${item.step}_title`),
+    desc: t(`how_step${item.step}_desc`),
+  }));
+
   return (
     <div className="pt-20" data-testid="homepage">
       {/* Hero Section */}
@@ -22,26 +40,25 @@ const HomePage = () => {
               <div className="inline-flex items-center gap-2 bg-sage-pale rounded-pill px-4 py-2">
                 <span className="w-2 h-2 bg-sage rounded-full animate-pulse"></span>
                 <span className="text-sm font-medium text-sage">
-                  Trusted by 40,000+ families across India & Europe
+                  {t('hero_badge')}
                 </span>
               </div>
 
               {/* Headline */}
               <h1 className="heading-display">
-                Care that feels like <span className="italic text-sage">family</span>
+                {t('hero_headline')} <span className="italic text-sage">{t('hero_headline_em')}</span>
               </h1>
 
               {/* Subheadline */}
               <p className="text-lg text-lotus-text-mid leading-relaxed max-w-lg">
-                Find verified nurses, caregivers, home helpers, and counselors — handpicked,
-                background-checked, and ready to help when you need it most.
+                {t('hero_sub')}
               </p>
 
               {/* Search Bar */}
               <div className="relative max-w-xl">
                 <input
                   type="text"
-                  placeholder="What kind of care are you looking for?"
+                  placeholder={t('hero_search_placeholder')}
                   className="w-full rounded-pill border-2 border-lotus-border bg-white pl-5 pr-36 py-4 text-base text-sage-dark placeholder-lotus-text-muted focus:border-sage focus:outline-none focus:ring-4 focus:ring-sage/10 transition-all"
                   data-testid="hero-search-input"
                 />
@@ -50,19 +67,19 @@ const HomePage = () => {
                   data-testid="hero-search-btn"
                 >
                   <span className="flex items-center gap-2">
-                    Search <ArrowRight size={16} />
+                    {t('hero_search_btn')} <ArrowRight size={16} />
                   </span>
                 </button>
               </div>
 
               {/* Quick Filters */}
               <div className="flex flex-wrap gap-2">
-                {quickFilters.map((filter) => (
+                {Array.isArray(translatedQuickFilters) && translatedQuickFilters.map((filter, idx) => (
                   <Link
-                    key={filter}
+                    key={idx}
                     to={`/category/healthcare?filter=${filter.toLowerCase().replace(/\s+/g, '-')}`}
                     className="px-4 py-2 rounded-pill bg-white border border-lotus-border text-sm text-lotus-text-mid hover:border-sage hover:text-sage transition-all"
-                    data-testid={`quick-filter-${filter.toLowerCase().replace(/\s+/g, '-')}`}
+                    data-testid={`quick-filter-${idx}`}
                   >
                     {filter}
                   </Link>
@@ -73,17 +90,17 @@ const HomePage = () => {
               <div className="flex items-center gap-6 pt-2">
                 <div className="flex items-center gap-2 text-sm text-lotus-text-mid">
                   <Check size={18} className="text-sage" />
-                  <span>Background Verified</span>
+                  <span>{t('hero_trust_verified')}</span>
                 </div>
                 <div className="w-px h-4 bg-lotus-border"></div>
                 <div className="flex items-center gap-2 text-sm text-lotus-text-mid">
                   <Shield size={18} className="text-sage" />
-                  <span>Insured</span>
+                  <span>{t('hero_trust_insured')}</span>
                 </div>
                 <div className="w-px h-4 bg-lotus-border"></div>
                 <div className="flex items-center gap-2 text-sm text-lotus-text-mid">
                   <Star size={18} className="text-gold fill-gold" />
-                  <span>Avg 4.9 Rating</span>
+                  <span>{t('hero_trust_rating')}</span>
                 </div>
               </div>
             </div>
@@ -98,9 +115,9 @@ const HomePage = () => {
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 avatar-circle avatar-sage text-lg">PS</div>
                   <div className="flex-1">
-                    <div className="badge-sage text-xs mb-1">✓ Verified Nurse</div>
+                    <div className="badge-sage text-xs mb-1">{t('hero_card_badge')}</div>
                     <h4 className="font-serif font-semibold text-sage-dark">Priya Sharma</h4>
-                    <p className="text-sm text-lotus-text-muted">Post-Surgery Care • 8 yrs exp</p>
+                    <p className="text-sm text-lotus-text-muted">{t('hero_card_specialty')}</p>
                     <div className="flex items-center gap-1 mt-2">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} size={14} className="text-gold fill-gold" />
@@ -119,13 +136,13 @@ const HomePage = () => {
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-2 h-2 bg-sage rounded-full"></span>
-                  <span className="text-sm font-medium text-sage">Booking confirmed</span>
+                  <span className="text-sm font-medium text-sage">{t('hero_booking_status')}</span>
                 </div>
-                <p className="text-sm font-medium text-sage-dark">Post-Surgery Care</p>
-                <p className="text-xs text-lotus-text-muted">Tomorrow, 9:00 AM - 5:00 PM</p>
+                <p className="text-sm font-medium text-sage-dark">{t('hero_booking_service')}</p>
+                <p className="text-xs text-lotus-text-muted">{t('hero_booking_time')}</p>
                 <div className="mt-3 inline-flex items-center gap-2 bg-sage/10 rounded-pill px-3 py-1">
                   <Check size={14} className="text-sage" />
-                  <span className="text-xs font-medium text-sage">Caregiver on the way</span>
+                  <span className="text-xs font-medium text-sage">{t('hero_booking_action')}</span>
                 </div>
               </div>
 
@@ -134,12 +151,12 @@ const HomePage = () => {
                 className="absolute bottom-16 left-8 card-lotus p-4 w-56 float-animation-delayed-2"
                 data-testid="hero-matched-card"
               >
-                <p className="text-xs text-lotus-text-muted mb-2">Matched for you</p>
+                <p className="text-xs text-lotus-text-muted mb-2">{t('hero_matched_label')}</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 avatar-circle avatar-blush text-sm">MR</div>
                   <div>
                     <p className="text-sm font-medium text-sage-dark">Meera R.</p>
-                    <p className="text-xs text-lotus-text-muted">2.5 km away</p>
+                    <p className="text-xs text-lotus-text-muted">{t('hero_matched_distance')}</p>
                   </div>
                 </div>
               </div>
@@ -156,24 +173,24 @@ const HomePage = () => {
       <section className="bg-warm-white section-padding" data-testid="categories-section">
         <div className="section-container">
           <div className="text-center mb-12">
-            <span className="label-overline">Our Services</span>
-            <h2 className="heading-section mt-3 mb-4">Every kind of care, under one roof</h2>
+            <span className="label-overline">{t('cat_overline')}</span>
+            <h2 className="heading-section mt-3 mb-4">{t('cat_heading')}</h2>
             <p className="text-body max-w-2xl mx-auto">
-              From medical support to everyday help — choose the care that fits your life.
+              {t('cat_sub')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {categories.map((category) => (
+            {translatedCategories.map((category) => (
               <Link
                 key={category.id}
                 to={category.link}
                 className={`${category.gradient} rounded-card p-8 relative overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover`}
-                data-testid={`category-card-${category.title.toLowerCase().replace(/\s+/g, '-')}`}
+                data-testid={`category-card-${category.id}`}
               >
                 {/* Provider count badge */}
                 <span className="absolute top-6 right-6 bg-white/80 backdrop-blur-sm rounded-pill px-3 py-1 text-xs font-medium text-sage-dark">
-                  {category.providers} providers
+                  {category.providers} {t('cat_providers_label')}
                 </span>
 
                 <span className="text-5xl mb-4 block">{category.icon}</span>
@@ -181,7 +198,7 @@ const HomePage = () => {
                 <p className="text-body text-sm mb-4">{category.description}</p>
 
                 <div className="flex flex-wrap gap-2">
-                  {category.tags.map((tag) => (
+                  {Array.isArray(category.tags) && category.tags.map((tag) => (
                     <span
                       key={tag}
                       className="bg-white/60 backdrop-blur-sm rounded-pill px-3 py-1 text-xs text-sage-dark"
@@ -192,7 +209,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="mt-6 flex items-center gap-2 text-sage font-medium text-sm group-hover:gap-3 transition-all">
-                  Explore <ChevronRight size={16} />
+                  {t('cat_explore')} <ChevronRight size={16} />
                 </div>
               </Link>
             ))}
@@ -205,15 +222,15 @@ const HomePage = () => {
         <div className="section-container">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
             <div>
-              <span className="label-overline">Featured Providers</span>
-              <h2 className="heading-section mt-3">Trusted by families like yours</h2>
+              <span className="label-overline">{t('featured_overline')}</span>
+              <h2 className="heading-section mt-3">{t('featured_heading')}</h2>
             </div>
             <Link
               to="/category/healthcare"
               className="btn-outline text-sm"
               data-testid="view-all-providers-btn"
             >
-              View all providers
+              {t('featured_view_all')}
             </Link>
           </div>
 
@@ -245,7 +262,7 @@ const HomePage = () => {
                     </div>
                     <div>
                       <p className="font-medium text-sage-dark text-sm">{provider.name}</p>
-                      <span className="badge-sage text-[10px]">✓ Verified</span>
+                      <span className="badge-sage text-[10px]">{t('badge_verified')}</span>
                     </div>
                   </div>
 
@@ -284,25 +301,25 @@ const HomePage = () => {
               <p className="font-serif text-4xl lg:text-5xl font-medium text-white">
                 40K<span className="text-blush">+</span>
               </p>
-              <p className="text-white/70 text-sm mt-2">Families served</p>
+              <p className="text-white/70 text-sm mt-2">{t('stat_families')}</p>
             </div>
             <div>
               <p className="font-serif text-4xl lg:text-5xl font-medium text-white">
                 4.9<span className="text-blush">★</span>
               </p>
-              <p className="text-white/70 text-sm mt-2">Average provider rating</p>
+              <p className="text-white/70 text-sm mt-2">{t('stat_rating')}</p>
             </div>
             <div>
               <p className="font-serif text-4xl lg:text-5xl font-medium text-white">
                 545<span className="text-blush">+</span>
               </p>
-              <p className="text-white/70 text-sm mt-2">Verified caregivers</p>
+              <p className="text-white/70 text-sm mt-2">{t('stat_caregivers')}</p>
             </div>
             <div>
               <p className="font-serif text-4xl lg:text-5xl font-medium text-white">
                 98<span className="text-blush">%</span>
               </p>
-              <p className="text-white/70 text-sm mt-2">Satisfaction rate</p>
+              <p className="text-white/70 text-sm mt-2">{t('stat_satisfaction')}</p>
             </div>
           </div>
         </div>
@@ -312,11 +329,11 @@ const HomePage = () => {
       <section className="bg-cream section-padding" id="how-it-works" data-testid="how-it-works-section">
         <div className="section-container">
           <div className="text-center mb-14">
-            <h2 className="heading-section">Care in 4 simple steps</h2>
+            <h2 className="heading-section">{t('how_heading')}</h2>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {howItWorks.map((item, index) => (
+            {translatedHowItWorks.map((item, index) => (
               <div key={item.step} className={`text-center ${index < 3 ? 'step-connector' : ''}`}>
                 <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-sage text-white font-serif text-xl font-semibold flex items-center justify-center shadow-lg">
                   {item.step}
@@ -333,8 +350,8 @@ const HomePage = () => {
       <section className="bg-warm-white section-padding" data-testid="testimonials-section">
         <div className="section-container">
           <div className="text-center mb-12">
-            <span className="label-overline">What Families Say</span>
-            <h2 className="heading-section mt-3">Stories of trust and care</h2>
+            <span className="label-overline">{t('test_overline')}</span>
+            <h2 className="heading-section mt-3">{t('test_heading')}</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -376,17 +393,14 @@ const HomePage = () => {
           <div className="bg-sage-pale border border-sage-light rounded-[20px] p-8 lg:p-12">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div>
-                <h3 className="heading-section mb-4">Are you a caregiver, nurse, or counselor?</h3>
-                <p className="text-body mb-6">
-                  Join India's fastest-growing care marketplace. Set your own schedule, connect with
-                  families who need you, and grow your practice.
-                </p>
+                <h3 className="heading-section mb-4">{t('recruit_heading')}</h3>
+                <p className="text-body mb-6">{t('recruit_body')}</p>
                 <div className="flex flex-wrap gap-3 mb-8">
                   {[
-                    'Free to join',
-                    'Instant payouts',
-                    'You set your schedule',
-                    'Liability insurance included',
+                    t('perk_free'),
+                    t('perk_payouts'),
+                    t('perk_schedule'),
+                    t('perk_insurance'),
                   ].map((perk) => (
                     <span key={perk} className="badge-sage">
                       <Check size={14} className="mr-1" /> {perk}
@@ -400,14 +414,14 @@ const HomePage = () => {
                   data-testid="become-provider-btn"
                   onClick={() => console.log('Become a Provider clicked')}
                 >
-                  Become a Provider
+                  {t('btn_become_provider')}
                 </button>
                 <button
                   className="btn-outline"
                   data-testid="learn-more-btn"
                   onClick={() => console.log('Learn more clicked')}
                 >
-                  Learn more <ArrowRight size={16} className="ml-2" />
+                  {t('btn_learn_more')} <ArrowRight size={16} className="ml-2" />
                 </button>
               </div>
             </div>
@@ -418,10 +432,9 @@ const HomePage = () => {
       {/* Final CTA Section */}
       <section className="bg-cream section-padding" data-testid="final-cta-section">
         <div className="section-container text-center">
-          <h2 className="heading-section mb-4">Your family deserves the very best care</h2>
+          <h2 className="heading-section mb-4">{t('cta_heading')}</h2>
           <p className="text-body max-w-2xl mx-auto mb-8">
-            Whether you need medical support, help around the house, or someone to talk to — we're
-            here to connect you with trusted, verified caregivers.
+            {t('cta_body')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -429,14 +442,14 @@ const HomePage = () => {
               className="btn-primary"
               data-testid="final-cta-find-btn"
             >
-              Find a Caregiver Today
+              {t('btn_find_today')}
             </Link>
             <Link
               to="/category/healthcare"
               className="btn-outline"
               data-testid="final-cta-browse-btn"
             >
-              Browse All Services
+              {t('btn_browse_services')}
             </Link>
           </div>
         </div>

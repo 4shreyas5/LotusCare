@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from './lib/LanguageContext';
 
 // Layout Components
 import Navbar from './components/Navbar';
@@ -26,6 +27,7 @@ const Layout = ({ children }) => {
 function App() {
   return (
     <div className="App">
+      <LanguageProvider>
       <BrowserRouter>
         <Layout>
           <Routes>
@@ -37,6 +39,7 @@ function App() {
           </Routes>
         </Layout>
       </BrowserRouter>
+      </LanguageProvider>
     </div>
   );
 }

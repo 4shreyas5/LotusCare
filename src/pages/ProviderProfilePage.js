@@ -12,17 +12,19 @@ import {
   Award,
 } from 'lucide-react';
 import { profileData } from '../data/providers';
+import { useLanguage } from '../lib/LanguageContext';
 
 const ProviderProfilePage = () => {
   const { providerId } = useParams();
   const provider = profileData[providerId] || profileData[1];
   const [activeTab, setActiveTab] = useState('overview');
+  const { t } = useLanguage();
 
   const tabs = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'services', label: 'Services' },
-    { id: 'reviews', label: 'Reviews' },
-    { id: 'credentials', label: 'Credentials' },
+    { id: 'overview', label: t('pp_tab_overview') },
+    { id: 'services', label: t('pp_tab_services') },
+    { id: 'reviews', label: t('pp_tab_reviews') },
+    { id: 'credentials', label: t('pp_tab_credentials') },
   ];
 
   return (
@@ -39,12 +41,12 @@ const ProviderProfilePage = () => {
                 <h1 className="font-serif text-3xl font-medium text-sage-dark">{provider.name}</h1>
                 {provider.verified && (
                   <span className="badge-sage">
-                    <Check size={12} className="mr-1" /> Verified
+                    <Check size={12} className="mr-1" /> {t('pp_verified')}
                   </span>
                 )}
                 {provider.topRated && (
                   <span className="bg-gold/20 text-gold rounded-pill px-2.5 py-1 text-xs font-medium">
-                    <Award size={12} className="inline mr-1" /> Top Rated
+                    <Award size={12} className="inline mr-1" /> {t('pp_top_rated')}
                   </span>
                 )}
               </div>
@@ -64,7 +66,7 @@ const ProviderProfilePage = () => {
                 className="btn-primary"
                 data-testid="book-session-btn"
               >
-                Book a Session
+                {t('pp_book_session')}
               </Link>
               <button
                 className="btn-outline"
@@ -82,17 +84,17 @@ const ProviderProfilePage = () => {
               <p className="font-serif text-2xl font-medium text-sage-dark">
                 {provider.totalBookings}
               </p>
-              <p className="text-sm text-lotus-text-muted">Total Bookings</p>
+              <p className="text-sm text-lotus-text-muted">{t('pp_stat_bookings')}</p>
             </div>
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center">
               <p className="font-serif text-2xl font-medium text-sage-dark">{provider.experience}</p>
-              <p className="text-sm text-lotus-text-muted">Experience</p>
+              <p className="text-sm text-lotus-text-muted">{t('pp_stat_experience')}</p>
             </div>
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center">
               <p className="font-serif text-2xl font-medium text-sage-dark">
                 {provider.responseTime}
               </p>
-              <p className="text-sm text-lotus-text-muted">Response Time</p>
+              <p className="text-sm text-lotus-text-muted">{t('pp_stat_response')}</p>
             </div>
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 text-center">
               <div className="flex items-center justify-center gap-1">
@@ -101,7 +103,7 @@ const ProviderProfilePage = () => {
                   {provider.rating}
                 </span>
               </div>
-              <p className="text-sm text-lotus-text-muted">{provider.totalReviews} reviews</p>
+              <p className="text-sm text-lotus-text-muted">{provider.totalReviews} {t('pp_stat_reviews')}</p>
             </div>
           </div>
         </div>
@@ -136,14 +138,14 @@ const ProviderProfilePage = () => {
               <div className="space-y-8" data-testid="overview-tab-content">
                 {/* Bio */}
                 <div className="card-lotus p-6 lg:p-8">
-                  <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">About</h2>
+                  <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">{t('pp_about')}</h2>
                   <p className="text-body leading-relaxed mb-4">{provider.bio}</p>
                   <p className="text-body leading-relaxed">{provider.workingStyle}</p>
                 </div>
 
                 {/* Areas Served */}
                 <div className="card-lotus p-6 lg:p-8">
-                  <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">Areas Served</h2>
+                  <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">{t('pp_areas_served')}</h2>
                   <div className="flex flex-wrap gap-2">
                     {provider.areasServed.map((area) => (
                       <span key={area} className="badge-sage">
@@ -155,7 +157,7 @@ const ProviderProfilePage = () => {
 
                 {/* Languages */}
                 <div className="card-lotus p-6 lg:p-8">
-                  <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">Languages</h2>
+                  <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">{t('pp_languages')}</h2>
                   <div className="flex flex-wrap gap-2">
                     {provider.languages.map((lang) => (
                       <span key={lang} className="badge-blush">
@@ -196,7 +198,7 @@ const ProviderProfilePage = () => {
                         €{service.price}
                         <span className="text-lotus-text-muted font-normal text-sm">{service.unit}</span>
                       </p>
-                      <span className="btn-primary text-sm mt-2 inline-block">View Details</span>
+                      <span className="btn-primary text-sm mt-2 inline-block">{t('pp_view_details')}</span>
                     </div>
                   </Link>
                 ))}
@@ -218,7 +220,7 @@ const ProviderProfilePage = () => {
                           <Star key={i} size={18} className="text-gold fill-gold" />
                         ))}
                       </div>
-                      <p className="text-sm text-lotus-text-muted">{provider.totalReviews} reviews</p>
+                      <p className="text-sm text-lotus-text-muted">{provider.totalReviews} {t('pp_stat_reviews')}</p>
                     </div>
                     <div className="flex-1 w-full">
                       {[5, 4, 3, 2, 1].map((rating) => (
@@ -269,7 +271,7 @@ const ProviderProfilePage = () => {
                   data-testid="load-more-reviews"
                   onClick={() => console.log('Load more reviews')}
                 >
-                  Load more reviews
+                  {t('pp_load_more')}
                 </button>
               </div>
             )}
@@ -283,10 +285,8 @@ const ProviderProfilePage = () => {
                       <Check size={20} className="text-sage" />
                     </div>
                     <div>
-                      <p className="font-medium text-sage-dark">Identity Verified</p>
-                      <p className="text-sm text-lotus-text-muted">
-                        Government ID verified by Lotus Care
-                      </p>
+                      <p className="font-medium text-sage-dark">{t('pp_identity_verified')}</p>
+                      <p className="text-sm text-lotus-text-muted">{t('pp_identity_sub')}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -294,8 +294,8 @@ const ProviderProfilePage = () => {
                       <Shield size={20} className="text-sage" />
                     </div>
                     <div>
-                      <p className="font-medium text-sage-dark">Background Check</p>
-                      <p className="text-sm text-lotus-text-muted">Completed on March 2024</p>
+                      <p className="font-medium text-sage-dark">{t('pp_background_check')}</p>
+                      <p className="text-sm text-lotus-text-muted">{t('pp_background_sub')}</p>
                     </div>
                   </div>
                 </div>
@@ -314,7 +314,7 @@ const ProviderProfilePage = () => {
                         <h3 className="font-medium text-sage-dark">{cred.name}</h3>
                         {cred.verified && (
                           <span className="badge-sage text-[10px]">
-                            <Check size={10} className="mr-1" /> Verified
+                            <Check size={10} className="mr-1" /> {t('pp_verified')}
                           </span>
                         )}
                       </div>
@@ -331,7 +331,7 @@ const ProviderProfilePage = () => {
           <aside className="lg:w-80" data-testid="profile-sidebar">
             <div className="booking-widget card-lotus p-6 space-y-4">
               <div>
-                <p className="text-sm text-lotus-text-muted">Starting from</p>
+                <p className="text-sm text-lotus-text-muted">{t('pp_starting_from')}</p>
                 <p className="price-highlight text-2xl">
                   €18<span className="text-lotus-text-muted font-normal text-sm">/hr</span>
                 </p>
@@ -342,7 +342,7 @@ const ProviderProfilePage = () => {
                 className="btn-primary w-full justify-center"
                 data-testid="sidebar-book-btn"
               >
-                <Calendar size={18} className="mr-2" /> Book a Session
+                <Calendar size={18} className="mr-2" /> {t('pp_book_session')}
               </Link>
 
               <button
@@ -350,17 +350,17 @@ const ProviderProfilePage = () => {
                 data-testid="sidebar-message-btn"
                 onClick={() => console.log('Message clicked')}
               >
-                <MessageCircle size={18} className="mr-2" /> Message
+                <MessageCircle size={18} className="mr-2" /> {t('pp_message')}
               </button>
 
               <div className="pt-4 border-t border-lotus-border space-y-2">
                 <div className="flex items-center gap-2 text-sm text-lotus-text-muted">
                   <Clock size={14} className="text-sage" />
-                  <span>Usually responds {provider.responseTime.toLowerCase()}</span>
+                  <span>{t('pp_usually_responds')} {provider.responseTime.toLowerCase()}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-lotus-text-muted">
                   <Shield size={14} className="text-sage" />
-                  <span>Verified & background checked</span>
+                  <span>{t('pp_verified_checked')}</span>
                 </div>
               </div>
             </div>

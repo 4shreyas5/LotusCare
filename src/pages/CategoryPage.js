@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ChevronRight, Star, Check, SlidersHorizontal, X, MapPin } from 'lucide-react';
-import { categoryData, specializations } from '../data/homeData';
+import { categoryData } from '../data/homeData';
 import { allProviders } from '../data/providers';
+import { useLanguage } from '../lib/LanguageContext';
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
   const category = categoryData[categoryId] || categoryData.healthcare;
+  const { t } = useLanguage();
 
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState('relevant');
@@ -19,6 +21,25 @@ const CategoryPage = () => {
     gender: '',
     rating: '',
   });
+
+  // Get translated specializations for this category
+  const specKey = `spec_${categoryId?.replace('-', '_')}`;
+  const translatedSpecs = t(specKey);
+  const specs = Array.isArray(translatedSpecs) ? translatedSpecs : [];
+
+  // Translated category title/description from translations
+  const catTitleMap = {
+    healthcare: t('cat1_title'),
+    'home-support': t('cat2_title'),
+    'personal-support': t('cat3_title'),
+  };
+  const catDescMap = {
+    healthcare: 'Professional medical care at home — from nursing to rehabilitation, palliative care to post-surgery support.',
+    'home-support': 'Trusted help for daily household tasks and family needs — cleaning, cooking, childcare, and more.',
+    'personal-support': 'Emotional wellness, companionship, and professional guidance when you need it most.',
+  };
+
+  const displayTitle = catTitleMap[categoryId] || category.title;
 
   // Filter providers
   const filteredProviders = allProviders.filter((p) => p.category === categoryId);
@@ -48,10 +69,10 @@ const CategoryPage = () => {
               className="text-lotus-text-muted hover:text-sage transition-colors"
               data-testid="breadcrumb-home"
             >
-              Home
+              {t('breadcrumb_home')}
             </Link>
             <ChevronRight size={14} className="text-lotus-text-muted" />
-            <span className="text-sage-dark font-medium">{category.title}</span>
+            <span className="text-sage-dark font-medium">{displayTitle}</span>
           </nav>
         </div>
       </div>
@@ -62,9 +83,11 @@ const CategoryPage = () => {
           <div className="flex items-start gap-4">
             <span className="text-5xl">{category.icon}</span>
             <div>
-              <h1 className="heading-section mb-2">{category.title}</h1>
-              <p className="text-body max-w-2xl">{category.description}</p>
-              <span className="badge-sage mt-3 inline-block">{category.providers}+ providers available</span>
+              <h1 className="heading-section mb-2">{displayTitle}</h1>
+              <p className="text-body max-w-2xl">{catDescMap[categoryId] || category.description}</p>
+              <span className="badge-sage mt-3 inline-block">
+                {category.providers}{t('providers_available_suffix')}
+              </span>
             </div>
           </div>
         </div>
@@ -75,17 +98,17 @@ const CategoryPage = () => {
           {/* Filters Sidebar - Desktop */}
           <aside className="hidden lg:block w-64 flex-shrink-0" data-testid="filters-sidebar">
             <div className="card-lotus p-6 sticky top-24">
-              <h3 className="font-serif text-lg font-medium text-sage-dark mb-6">Filters</h3>
+              <h3 className="font-serif text-lg font-medium text-sage-dark mb-6">{t('filters_title')}</h3>
 
               {/* Price Range */}
               <div className="filter-section">
                 <label className="text-sm font-medium text-sage-dark block mb-3">
-                  Price Range (€/hr)
+                  {t('price_range_label')}
                 </label>
                 <div className="flex gap-2">
                   <input
                     type="number"
-                    placeholder="Min"
+                    placeholder={t('price_min_placeholder')}
                     className="input-lotus text-sm py-2"
                     value={filters.priceMin}
                     onChange={(e) => setFilters({ ...filters, priceMin: e.target.value })}
@@ -93,7 +116,7 @@ const CategoryPage = () => {
                   />
                   <input
                     type="number"
-                    placeholder="Max"
+                    placeholder={t('price_max_placeholder')}
                     className="input-lotus text-sm py-2"
                     value={filters.priceMax}
                     onChange={(e) => setFilters({ ...filters, priceMax: e.target.value })}
@@ -104,16 +127,20 @@ const CategoryPage = () => {
 
               {/* Availability */}
               <div className="filter-section">
-                <label className="text-sm font-medium text-sage-dark block mb-3">Availability</label>
+                <label className="text-sm font-medium text-sage-dark block mb-3">{t('availability_label')}</label>
                 <div className="space-y-2">
-                  {['Today', 'This week', 'Weekends'].map((option) => (
-                    <label key={option} className="flex items-center gap-2 cursor-pointer">
+                  {[
+                    { key: 'avail_today', testId: 'today' },
+                    { key: 'avail_this_week', testId: 'this-week' },
+                    { key: 'avail_weekends', testId: 'weekends' },
+                  ].map(({ key, testId }) => (
+                    <label key={key} className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
                         className="w-4 h-4 rounded border-lotus-border text-sage focus:ring-sage"
-                        data-testid={`filter-availability-${option.toLowerCase().replace(/\s+/g, '-')}`}
+                        data-testid={`filter-availability-${testId}`}
                       />
-                      <span className="text-sm text-lotus-text-mid">{option}</span>
+                      <span className="text-sm text-lotus-text-mid">{t(key)}</span>
                     </label>
                   ))}
                 </div>
@@ -122,18 +149,22 @@ const CategoryPage = () => {
               {/* Experience Level */}
               <div className="filter-section">
                 <label className="text-sm font-medium text-sage-dark block mb-3">
-                  Experience Level
+                  {t('experience_label')}
                 </label>
                 <div className="space-y-2">
-                  {['Junior (1-3 yrs)', 'Senior (4-7 yrs)', 'Expert (8+ yrs)'].map((option) => (
-                    <label key={option} className="flex items-center gap-2 cursor-pointer">
+                  {[
+                    { key: 'exp_junior', testId: 'junior' },
+                    { key: 'exp_senior', testId: 'senior' },
+                    { key: 'exp_expert', testId: 'expert' },
+                  ].map(({ key, testId }) => (
+                    <label key={key} className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="radio"
                         name="experience"
                         className="w-4 h-4 border-lotus-border text-sage focus:ring-sage"
-                        data-testid={`filter-experience-${option.split(' ')[0].toLowerCase()}`}
+                        data-testid={`filter-experience-${testId}`}
                       />
-                      <span className="text-sm text-lotus-text-mid">{option}</span>
+                      <span className="text-sm text-lotus-text-mid">{t(key)}</span>
                     </label>
                   ))}
                 </div>
@@ -141,9 +172,9 @@ const CategoryPage = () => {
 
               {/* Specialization */}
               <div className="filter-section">
-                <label className="text-sm font-medium text-sage-dark block mb-3">Specialization</label>
+                <label className="text-sm font-medium text-sage-dark block mb-3">{t('specialization_label')}</label>
                 <div className="flex flex-wrap gap-2">
-                  {(specializations[categoryId] || specializations.healthcare).map((spec) => (
+                  {specs.map((spec) => (
                     <button
                       key={spec}
                       className="px-3 py-1.5 rounded-pill text-xs border border-lotus-border text-lotus-text-mid hover:border-sage hover:text-sage transition-colors"
@@ -157,17 +188,21 @@ const CategoryPage = () => {
 
               {/* Rating */}
               <div className="filter-section">
-                <label className="text-sm font-medium text-sage-dark block mb-3">Rating</label>
+                <label className="text-sm font-medium text-sage-dark block mb-3">{t('rating_label')}</label>
                 <div className="space-y-2">
-                  {['4★ & above', '4.5★ & above', '5★ only'].map((option) => (
-                    <label key={option} className="flex items-center gap-2 cursor-pointer">
+                  {[
+                    { key: 'rating_4', testId: '4' },
+                    { key: 'rating_45', testId: '4.5' },
+                    { key: 'rating_5', testId: '5' },
+                  ].map(({ key, testId }) => (
+                    <label key={key} className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="radio"
                         name="rating"
                         className="w-4 h-4 border-lotus-border text-sage focus:ring-sage"
-                        data-testid={`filter-rating-${option.split('★')[0]}`}
+                        data-testid={`filter-rating-${testId}`}
                       />
-                      <span className="text-sm text-lotus-text-mid">{option}</span>
+                      <span className="text-sm text-lotus-text-mid">{t(key)}</span>
                     </label>
                   ))}
                 </div>
@@ -178,7 +213,7 @@ const CategoryPage = () => {
                 data-testid="apply-filters-btn"
                 onClick={() => console.log('Filters applied:', filters)}
               >
-                Apply Filters
+                {t('apply_filters_btn')}
               </button>
             </div>
           </aside>
@@ -189,7 +224,7 @@ const CategoryPage = () => {
             onClick={() => setShowFilters(true)}
             data-testid="mobile-filter-btn"
           >
-            <SlidersHorizontal size={18} /> Filters
+            <SlidersHorizontal size={18} /> {t('filters_title')}
           </button>
 
           {/* Mobile Filter Modal */}
@@ -203,7 +238,7 @@ const CategoryPage = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-serif text-lg font-medium text-sage-dark">Filters</h3>
+                  <h3 className="font-serif text-lg font-medium text-sage-dark">{t('filters_title')}</h3>
                   <button onClick={() => setShowFilters(false)} data-testid="close-filters-btn">
                     <X size={24} className="text-lotus-text-mid" />
                   </button>
@@ -212,7 +247,7 @@ const CategoryPage = () => {
                   className="btn-primary w-full mt-4"
                   onClick={() => setShowFilters(false)}
                 >
-                  Apply Filters
+                  {t('apply_filters_btn')}
                 </button>
               </div>
             </div>
@@ -223,21 +258,21 @@ const CategoryPage = () => {
             {/* Sort Bar */}
             <div className="flex items-center justify-between mb-6">
               <p className="text-sm text-lotus-text-muted">
-                <span className="font-medium text-sage-dark">{sortedProviders.length}</span> providers
-                found
+                <span className="font-medium text-sage-dark">{sortedProviders.length}</span>{' '}
+                {t('providers_found_suffix')}
               </p>
               <div className="flex items-center gap-3">
-                <label className="text-sm text-lotus-text-muted">Sort by:</label>
+                <label className="text-sm text-lotus-text-muted">{t('sort_by_label')}</label>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className="input-lotus py-2 px-3 text-sm w-44"
                   data-testid="sort-select"
                 >
-                  <option value="relevant">Most Relevant</option>
-                  <option value="rating">Top Rated</option>
-                  <option value="price-low">Lowest Price</option>
-                  <option value="reviews">Most Reviews</option>
+                  <option value="relevant">{t('sort_relevant')}</option>
+                  <option value="rating">{t('sort_rating_opt')}</option>
+                  <option value="price-low">{t('sort_price')}</option>
+                  <option value="reviews">{t('sort_reviews')}</option>
                 </select>
               </div>
             </div>
@@ -258,12 +293,12 @@ const CategoryPage = () => {
                     </div>
                     {provider.topRated && (
                       <span className="absolute top-3 right-3 bg-gold/20 text-gold rounded-pill px-2.5 py-1 text-xs font-medium">
-                        Top Rated
+                        {t('sort_rating_opt')}
                       </span>
                     )}
                     {provider.verified && (
                       <span className="absolute top-3 left-3 badge-sage text-[10px]">
-                        <Check size={12} className="mr-1" /> Verified
+                        <Check size={12} className="mr-1" /> {t('badge_verified').replace('✓ ', '')}
                       </span>
                     )}
                   </div>

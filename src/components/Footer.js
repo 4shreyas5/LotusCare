@@ -1,32 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../lib/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   const footerLinks = {
     services: [
-      { name: 'Healthcare Support', path: '/category/healthcare' },
-      { name: 'Home Support', path: '/category/home-support' },
-      { name: 'Personal Support', path: '/category/personal-support' },
-      { name: 'Elderly Care', path: '/category/healthcare' },
-      { name: 'Post-Surgery Care', path: '/category/healthcare' },
+      { key: 'footer_healthcare', path: '/category/healthcare' },
+      { key: 'footer_home_support', path: '/category/home-support' },
+      { key: 'footer_personal_support', path: '/category/personal-support' },
+      { key: 'footer_elderly', path: '/category/healthcare' },
+      { key: 'footer_post_surgery', path: '/category/healthcare' },
     ],
     company: [
-      { name: 'About Us', path: '#' },
-      { name: 'Careers', path: '#' },
-      { name: 'Press', path: '#' },
-      { name: 'Blog', path: '#' },
-      { name: 'Partners', path: '#' },
+      { key: 'footer_about', path: '#' },
+      { key: 'footer_careers', path: '#' },
+      { key: 'footer_press', path: '#' },
+      { key: 'footer_blog', path: '#' },
+      { key: 'footer_partners', path: '#' },
     ],
     support: [
-      { name: 'Help Center', path: '#' },
-      { name: 'Safety Center', path: '#' },
-      { name: 'Community Guidelines', path: '#' },
-      { name: 'Contact Us', path: '#' },
-      { name: 'Accessibility', path: '#' },
+      { key: 'footer_help', path: '#' },
+      { key: 'footer_safety', path: '#' },
+      { key: 'footer_guidelines', path: '#' },
+      { key: 'footer_contact', path: '#' },
+      { key: 'footer_accessibility', path: '#' },
     ],
   };
 
-  const certifications = [  ];
+  const certifications = [];
 
   return (
     <footer className="bg-lotus-text-dark text-white" data-testid="footer">
@@ -47,23 +50,22 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-white/70 text-sm leading-relaxed mt-4">
-              Connecting families with verified, compassionate caregivers across India and Europe. 
-              Trust, safety, and human connection — that's our promise.
+              {t('footer_tagline')}
             </p>
           </div>
 
           {/* Services Column */}
           <div>
-            <h4 className="font-serif text-lg font-medium text-white mb-4">Services</h4>
+            <h4 className="font-serif text-lg font-medium text-white mb-4">{t('footer_col_services')}</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
-                <li key={link.name}>
+                <li key={link.key}>
                   <Link
                     to={link.path}
                     className="text-sm text-white/70 hover:text-blush transition-colors duration-200"
-                    data-testid={`footer-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    data-testid={`footer-link-${link.key}`}
                   >
-                    {link.name}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -72,16 +74,16 @@ const Footer = () => {
 
           {/* Company Column */}
           <div>
-            <h4 className="font-serif text-lg font-medium text-white mb-4">Company</h4>
+            <h4 className="font-serif text-lg font-medium text-white mb-4">{t('footer_col_company')}</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
-                <li key={link.name}>
+                <li key={link.key}>
                   <Link
                     to={link.path}
                     className="text-sm text-white/70 hover:text-blush transition-colors duration-200"
-                    data-testid={`footer-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    data-testid={`footer-link-${link.key}`}
                   >
-                    {link.name}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -90,16 +92,16 @@ const Footer = () => {
 
           {/* Support Column */}
           <div>
-            <h4 className="font-serif text-lg font-medium text-white mb-4">Support</h4>
+            <h4 className="font-serif text-lg font-medium text-white mb-4">{t('footer_col_support')}</h4>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
-                <li key={link.name}>
+                <li key={link.key}>
                   <Link
                     to={link.path}
                     className="text-sm text-white/70 hover:text-blush transition-colors duration-200"
-                    data-testid={`footer-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    data-testid={`footer-link-${link.key}`}
                   >
-                    {link.name}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -110,7 +112,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-white/50">
-            © 2025 Lotus Care. All rights reserved.
+            {t('footer_copyright')}
           </p>
           <div className="flex items-center gap-4">
             {certifications.map((cert) => (

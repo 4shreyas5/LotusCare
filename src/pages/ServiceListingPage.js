@@ -13,12 +13,14 @@ import {
   Share2,
 } from 'lucide-react';
 import { providerDetails } from '../data/providers';
+import { useLanguage } from '../lib/LanguageContext';
 
 const ServiceListingPage = () => {
   const { serviceId } = useParams();
   const provider = providerDetails[serviceId] || providerDetails[1];
   const [selectedPackage, setSelectedPackage] = useState('standard');
   const [selectedDate, setSelectedDate] = useState(null);
+  const { t } = useLanguage();
 
   const dates = [
     { day: 'Mon', date: 15, available: true },
@@ -41,7 +43,7 @@ const ServiceListingPage = () => {
               className="text-lotus-text-muted hover:text-sage transition-colors"
               data-testid="breadcrumb-home"
             >
-              Home
+              {t('breadcrumb_home')}
             </Link>
             <ChevronRight size={14} className="text-lotus-text-muted" />
             <Link
@@ -49,7 +51,7 @@ const ServiceListingPage = () => {
               className="text-lotus-text-muted hover:text-sage transition-colors"
               data-testid="breadcrumb-category"
             >
-              Healthcare Support
+              {t('breadcrumb_healthcare')}
             </Link>
             <ChevronRight size={14} className="text-lotus-text-muted" />
             <span className="text-sage-dark font-medium">{provider.name}</span>
@@ -74,12 +76,12 @@ const ServiceListingPage = () => {
                     </h1>
                     {provider.verified && (
                       <span className="badge-sage text-xs">
-                        <Check size={12} className="mr-1" /> Verified
+                        <Check size={12} className="mr-1" /> {t('pp_verified')}
                       </span>
                     )}
                     {provider.topRated && (
                       <span className="bg-gold/20 text-gold rounded-pill px-2.5 py-1 text-xs font-medium">
-                        Top Rated
+                        {t('pp_top_rated')}
                       </span>
                     )}
                   </div>
@@ -89,7 +91,7 @@ const ServiceListingPage = () => {
                       <MapPin size={14} /> {provider.location}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock size={14} /> {provider.experience} experience
+                      <Clock size={14} /> {provider.experience} {t('sl_experience')}
                     </span>
                   </div>
                   <div className="flex items-center justify-center sm:justify-start gap-4 mt-4">
@@ -98,10 +100,10 @@ const ServiceListingPage = () => {
                         <Star key={i} size={16} className="text-gold fill-gold" />
                       ))}
                       <span className="font-medium text-sage-dark ml-1">{provider.rating}</span>
-                      <span className="text-lotus-text-muted">({provider.reviews} reviews)</span>
+                      <span className="text-lotus-text-muted">({provider.reviews} {t('sl_reviews')})</span>
                     </div>
                     <span className="text-sm text-lotus-text-muted">
-                      {provider.repeatHire}% repeat hire rate
+                      {provider.repeatHire}{t('sl_repeat_hire')}
                     </span>
                   </div>
                 </div>
@@ -126,7 +128,7 @@ const ServiceListingPage = () => {
 
             {/* About Section */}
             <div className="card-lotus p-6 lg:p-8" data-testid="about-section">
-              <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">About me</h2>
+              <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">{t('sl_about_me')}</h2>
               <p className="text-body leading-relaxed">{provider.bio}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {provider.languages.map((lang) => (
@@ -139,7 +141,7 @@ const ServiceListingPage = () => {
 
             {/* What's Included */}
             <div className="card-lotus p-6 lg:p-8" data-testid="included-section">
-              <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">What's included</h2>
+              <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">{t('sl_whats_included')}</h2>
               <div className="grid sm:grid-cols-2 gap-3">
                 {provider.included.map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
@@ -153,7 +155,7 @@ const ServiceListingPage = () => {
             {/* Credentials */}
             <div className="card-lotus p-6 lg:p-8" data-testid="credentials-section">
               <h2 className="font-serif text-xl font-medium text-sage-dark mb-4">
-                Credentials & Certifications
+                {t('sl_credentials')}
               </h2>
               <div className="space-y-4">
                 {provider.credentials.map((cred, index) => (
@@ -176,13 +178,13 @@ const ServiceListingPage = () => {
             <div className="card-lotus p-6 lg:p-8" data-testid="reviews-section">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-serif text-xl font-medium text-sage-dark">
-                  Reviews <span className="text-lotus-text-muted font-normal">({provider.reviews})</span>
+                  {t('sl_reviews_title')} <span className="text-lotus-text-muted font-normal">({provider.reviews})</span>
                 </h2>
                 <select className="input-lotus py-2 px-3 text-sm w-40" data-testid="reviews-filter">
-                  <option value="all">All ratings</option>
-                  <option value="5">5 stars</option>
-                  <option value="4">4 stars</option>
-                  <option value="3">3 stars</option>
+                  <option value="all">{t('sl_all_ratings')}</option>
+                  <option value="5">{t('sl_5_stars')}</option>
+                  <option value="4">{t('sl_4_stars')}</option>
+                  <option value="3">{t('sl_3_stars')}</option>
                 </select>
               </div>
 
@@ -198,13 +200,13 @@ const ServiceListingPage = () => {
                         <Star key={i} size={16} className="text-gold fill-gold" />
                       ))}
                     </div>
-                    <p className="text-sm text-lotus-text-muted">{provider.reviews} reviews</p>
+                    <p className="text-sm text-lotus-text-muted">{provider.reviews} {t('sl_reviews')}</p>
                   </div>
                 </div>
                 <div className="space-y-2">
                   {[5, 4, 3, 2, 1].map((rating) => (
                     <div key={rating} className="flex items-center gap-3">
-                      <span className="text-sm text-lotus-text-muted w-12">{rating} stars</span>
+                      <span className="text-sm text-lotus-text-muted w-16">{rating} {t('sl_stars')}</span>
                       <div className="flex-1 h-2 bg-lotus-border rounded-full overflow-hidden">
                         <div
                           className="h-full bg-gold rounded-full"
@@ -255,7 +257,7 @@ const ServiceListingPage = () => {
                 data-testid="load-more-reviews-btn"
                 onClick={() => console.log('Load more reviews')}
               >
-                Load more reviews
+                {t('sl_load_more')}
               </button>
             </div>
           </main>
@@ -264,8 +266,8 @@ const ServiceListingPage = () => {
           <aside className="lg:w-96" data-testid="booking-sidebar">
             <div className="booking-widget card-lotus p-6 space-y-6">
               <div>
-                <h3 className="font-serif text-lg font-medium text-sage-dark mb-1">Book a session</h3>
-                <p className="text-sm text-lotus-text-muted">Select a package and schedule your care</p>
+                <h3 className="font-serif text-lg font-medium text-sage-dark mb-1">{t('sl_book_session')}</h3>
+                <p className="text-sm text-lotus-text-muted">{t('sl_book_sub')}</p>
               </div>
 
               {/* Package Selector */}
@@ -285,7 +287,7 @@ const ServiceListingPage = () => {
                       <span className="font-medium text-sage-dark">{pkg.name}</span>
                       <span className="price-highlight">€{pkg.price}</span>
                     </div>
-                    <p className="text-xs text-lotus-text-muted mb-2">{pkg.hours} of care</p>
+                    <p className="text-xs text-lotus-text-muted mb-2">{pkg.hours} {t('sl_of_care')}</p>
                     <ul className="space-y-1">
                       {pkg.features.slice(0, 3).map((feature, i) => (
                         <li key={i} className="text-xs text-lotus-text-mid flex items-center gap-2">
@@ -302,7 +304,7 @@ const ServiceListingPage = () => {
 
               {/* Date Picker */}
               <div>
-                <label className="text-sm font-medium text-sage-dark block mb-3">Select date</label>
+                <label className="text-sm font-medium text-sage-dark block mb-3">{t('sl_select_date')}</label>
                 <div className="grid grid-cols-7 gap-2">
                   {dates.map((d, i) => (
                     <button
@@ -332,14 +334,14 @@ const ServiceListingPage = () => {
                   className="btn-primary w-full justify-center"
                   data-testid="book-now-btn"
                 >
-                  <Calendar size={18} className="mr-2" /> Book Now
+                  <Calendar size={18} className="mr-2" /> {t('sl_book_now')}
                 </Link>
                 <button
                   className="btn-outline w-full"
                   data-testid="message-provider-btn"
                   onClick={() => console.log('Message provider clicked')}
                 >
-                  <MessageCircle size={18} className="mr-2" /> Message Provider
+                  <MessageCircle size={18} className="mr-2" /> {t('sl_message_provider')}
                 </button>
               </div>
 
@@ -347,15 +349,15 @@ const ServiceListingPage = () => {
               <div className="space-y-2 pt-4 border-t border-lotus-border">
                 <div className="flex items-center gap-2 text-sm text-lotus-text-muted">
                   <Shield size={16} className="text-sage" />
-                  <span>Safe & secure payment</span>
+                  <span>{t('sl_safe_payment')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-lotus-text-muted">
                   <Check size={16} className="text-sage" />
-                  <span>Verified provider</span>
+                  <span>{t('sl_verified_provider')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-lotus-text-muted">
                   <Clock size={16} className="text-sage" />
-                  <span>Free cancellation (24hr notice)</span>
+                  <span>{t('sl_free_cancel')}</span>
                 </div>
               </div>
             </div>
