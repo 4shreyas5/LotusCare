@@ -28,7 +28,7 @@ const ProviderProfilePage = () => {
   ];
 
   return (
-    <div className="pt-20 bg-cream min-h-screen" data-testid="provider-profile-page">
+    <div className="pt-16 sm:pt-20 bg-cream min-h-screen" data-testid="provider-profile-page">
       {/* Cover & Profile Header */}
       <div className="bg-gradient-to-br from-sage-pale via-sage-light/30 to-blush-light/30">
         <div className="section-container py-12">

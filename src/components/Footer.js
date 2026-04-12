@@ -14,18 +14,18 @@ const Footer = () => {
       { key: 'footer_post_surgery', path: '/category/healthcare' },
     ],
     company: [
-      { key: 'footer_about', path: '#' },
-      { key: 'footer_careers', path: '#' },
-      { key: 'footer_press', path: '#' },
-      { key: 'footer_blog', path: '#' },
-      { key: 'footer_partners', path: '#' },
+      { key: 'footer_about', path: '/about' },
+      { key: 'footer_careers', path: '/careers' },
+      { key: 'footer_press', path: '/press' },
+      { key: 'footer_blog', path: '/blog' },
+      { key: 'footer_partners', path: '/partners' },
     ],
     support: [
-      { key: 'footer_help', path: '#' },
-      { key: 'footer_safety', path: '#' },
-      { key: 'footer_guidelines', path: '#' },
-      { key: 'footer_contact', path: '#' },
-      { key: 'footer_accessibility', path: '#' },
+      { key: 'footer_help', path: '/help' },
+      { key: 'footer_safety', path: '/safety' },
+      { key: 'footer_guidelines', path: '/guidelines' },
+      { key: 'footer_contact', path: '/contact' },
+      { key: 'footer_accessibility', path: '/accessibility' },
     ],
   };
 
@@ -45,7 +45,7 @@ const Footer = () => {
                   Lotus Care
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.15em] text-white/60 font-medium -mt-0.5">
-                  Care Marketplace
+                  Home Service Marketplace
                 </span>
               </div>
             </Link>

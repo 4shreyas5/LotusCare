@@ -59,7 +59,7 @@ const CategoryPage = () => {
   });
 
   return (
-    <div className="pt-20 bg-cream min-h-screen" data-testid="category-page">
+    <div className="pt-16 sm:pt-20 bg-cream min-h-screen" data-testid="category-page">
       {/* Breadcrumb */}
       <div className="bg-warm-white border-b border-lotus-border">
         <div className="section-container py-4">
@@ -79,12 +79,12 @@ const CategoryPage = () => {
 
       {/* Page Header */}
       <div className="bg-warm-white border-b border-lotus-border">
-        <div className="section-container py-8">
-          <div className="flex items-start gap-4">
-            <span className="text-5xl">{category.icon}</span>
-            <div>
-              <h1 className="heading-section mb-2">{displayTitle}</h1>
-              <p className="text-body max-w-2xl">{catDescMap[categoryId] || category.description}</p>
+        <div className="section-container py-6 sm:py-8">
+          <div className="flex items-start gap-3 sm:gap-4">
+            <span className="text-3xl sm:text-4xl lg:text-5xl flex-shrink-0">{category.icon}</span>
+            <div className="min-w-0">
+              <h1 className="heading-section mb-2 text-2xl sm:text-3xl">{displayTitle}</h1>
+              <p className="text-sm sm:text-base text-body max-w-2xl">{catDescMap[categoryId] || category.description}</p>
               <span className="badge-sage mt-3 inline-block">
                 {category.providers}{t('providers_available_suffix')}
               </span>

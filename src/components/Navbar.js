@@ -1,25 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Globe } from 'lucide-react';
-import { useLanguage, LANGUAGES } from '../lib/LanguageContext';
+import { Menu, X } from 'lucide-react';
+import { useLanguage } from '../lib/LanguageContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
   const location = useLocation();
-  const { t, language, changeLanguage } = useLanguage();
-  const langRef = useRef(null);
-
-  // Close language dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (langRef.current && !langRef.current.contains(e.target)) {
-        setLangOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const { t } = useLanguage();
 
   const navLinks = [
     { name: t('nav_healthcare'), path: '/category/healthcare' },
@@ -29,12 +16,10 @@ const Navbar = () => {
     { name: t('nav_for_providers'), path: '/#providers' },
   ];
 
-  const currentLang = LANGUAGES.find((l) => l.code === language) || LANGUAGES[0];
-
   return (
-    <nav className="nav-sticky fixed top-0 left-0 right-0 z-50" data-testid="navbar">
+    <nav className="nav-sticky fixed top-0 left-0 right-0 z-50 bg-white border-b border-lotus-border" data-testid="navbar">
       <div className="section-container">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2" data-testid="logo-link">
             <span className="text-3xl">🪷</span>
@@ -43,7 +28,7 @@ const Navbar = () => {
                 Lotus Care
               </span>
               <span className="text-[10px] uppercase tracking-[0.15em] text-lotus-text-muted font-medium -mt-0.5">
-                Care Marketplace
+                Home Service Marketplace
               </span>
             </div>
           </Link>
@@ -64,51 +49,8 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Desktop CTAs + Language Switcher */}
+          {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-3">
-            {/* Language Dropdown */}
-            <div className="relative" ref={langRef}>
-              <button
-                onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-full border border-lotus-border text-sm font-medium text-lotus-text-mid hover:border-sage hover:text-sage transition-all duration-200"
-                data-testid="lang-switcher-btn"
-                aria-label="Switch language"
-              >
-                <Globe size={14} />
-                <span>{currentLang.label}</span>
-                <ChevronDown
-                  size={13}
-                  className={`transition-transform duration-200 ${langOpen ? 'rotate-180' : ''}`}
-                />
-              </button>
-
-              {langOpen && (
-                <div
-                  className="absolute right-0 top-full mt-2 w-44 bg-white rounded-2xl shadow-card border border-lotus-border overflow-hidden z-50"
-                  data-testid="lang-dropdown"
-                >
-                  {LANGUAGES.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        changeLanguage(lang.code);
-                        setLangOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors hover:bg-sage-pale ${
-                        language === lang.code
-                          ? 'text-sage font-medium bg-sage-pale/50'
-                          : 'text-lotus-text-mid'
-                      }`}
-                      data-testid={`lang-option-${lang.code}`}
-                    >
-                      <span>{lang.name}</span>
-                      <span className="text-xs text-lotus-text-muted">{lang.label}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
             <Link
               to="/category/healthcare"
               className="btn-primary text-sm"
@@ -144,27 +86,7 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <hr className="border-lotus-border my-2" />
-
-              {/* Mobile Language Switcher */}
-              <div className="flex flex-wrap gap-2">
-                {LANGUAGES.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => changeLanguage(lang.code)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                      language === lang.code
-                        ? 'bg-sage text-white border-sage'
-                        : 'border-lotus-border text-lotus-text-mid hover:border-sage hover:text-sage'
-                    }`}
-                    data-testid={`mobile-lang-${lang.code}`}
-                  >
-                    {lang.label}
-                  </button>
-                ))}
-              </div>
-
-              <hr className="border-lotus-border" />
+              <hr className="border-lotus-border my-4" />
               <button className="btn-ghost text-sm w-fit" data-testid="mobile-sign-in-btn">
                 {t('nav_sign_in')}
               </button>

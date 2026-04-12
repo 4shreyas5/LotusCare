@@ -79,7 +79,7 @@ const BookingFlowPage = () => {
 
   if (bookingConfirmed) {
     return (
-      <div className="pt-20 bg-cream min-h-screen" data-testid="booking-confirmation">
+      <div className="pt-16 sm:pt-20 bg-cream min-h-screen" data-testid="booking-confirmation">
         <div className="section-container py-16">
           <div className="max-w-lg mx-auto text-center">
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-sage/10 flex items-center justify-center">
@@ -130,7 +130,7 @@ const BookingFlowPage = () => {
   }
 
   return (
-    <div className="pt-20 bg-cream min-h-screen" data-testid="booking-flow-page">
+    <div className="pt-16 sm:pt-20 bg-cream min-h-screen" data-testid="booking-flow-page">
       {/* Breadcrumb */}
       <div className="bg-warm-white border-b border-lotus-border">
         <div className="section-container py-4">

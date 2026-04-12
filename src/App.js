@@ -12,6 +12,16 @@ import CategoryPage from './pages/CategoryPage';
 import ServiceListingPage from './pages/ServiceListingPage';
 import ProviderProfilePage from './pages/ProviderProfilePage';
 import BookingFlowPage from './pages/BookingFlowPage';
+import AboutPage from './pages/AboutPage';
+import CareersPage from './pages/CareersPage';
+import PressPage from './pages/PressPage';
+import BlogPage from './pages/BlogPage';
+import PartnersPage from './pages/PartnersPage';
+import HelpPage from './pages/HelpPage';
+import SafetyPage from './pages/SafetyPage';
+import GuidelinesPage from './pages/GuidelinesPage';
+import ContactPage from './pages/ContactPage';
+import AccessibilityPage from './pages/AccessibilityPage';
 
 // Layout wrapper with Navbar and Footer
 const Layout = ({ children }) => {
@@ -36,6 +46,16 @@ function App() {
             <Route path="/service/:serviceId" element={<ServiceListingPage />} />
             <Route path="/provider/:providerId" element={<ProviderProfilePage />} />
             <Route path="/booking/:providerId" element={<BookingFlowPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/careers" element={<CareersPage />} />
+            <Route path="/press" element={<PressPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/partners" element={<PartnersPage />} />
+            <Route path="/help" element={<HelpPage />} />
+            <Route path="/safety" element={<SafetyPage />} />
+            <Route path="/guidelines" element={<GuidelinesPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/accessibility" element={<AccessibilityPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>

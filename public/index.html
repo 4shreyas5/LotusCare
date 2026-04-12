@@ -22,11 +22,69 @@
         Learn how to configure a non-root public URL by running `npm run build`.
         -->
         <title>Lotus Care</title>
+        <!-- Nuclear fix for addListener error -->
+        <script>
+          try {
+            // Create safe matchMedia wrapper
+            var _originalMatchMedia = window.matchMedia;
+            window.matchMedia = function(query) {
+              try {
+                var mql = _originalMatchMedia(query);
+                // Ensure addListener exists
+                if (!mql || typeof mql.addListener !== 'function') {
+                  var SafeMQL = {
+                    matches: mql ? mql.matches : false,
+                    media: query,
+                    onchange: null,
+                    addEventListener: function(type, listener) {
+                      if (mql && mql.addEventListener) mql.addEventListener(type, listener);
+                    },
+                    removeEventListener: function(type, listener) {
+                      if (mql && mql.removeEventListener) mql.removeEventListener(type, listener);
+                    },
+                    addListener: function(listener) {
+                      if (mql && mql.addEventListener) mql.addEventListener('change', listener);
+                    },
+                    removeListener: function(listener) {
+                      if (mql && mql.removeEventListener) mql.removeEventListener('change', listener);
+                    }
+                  };
+                  return SafeMQL;
+                }
+                return mql;
+              } catch (err) {
+                return {
+                  matches: false,
+                  media: query,
+                  onchange: null,
+                  addEventListener: function() {},
+                  removeEventListener: function() {},
+                  addListener: function() {},
+                  removeListener: function() {}
+                };
+              }
+            };
+          } catch (e) {
+            console.error('Failed to patch matchMedia:', e);
+          }
+
+          // Global error handler
+          window.addEventListener("error", function(event) {
+            if (event.message && event.message.includes("addListener")) {
+              console.warn("Suppressed addListener error");
+              event.preventDefault();
+              return true;
+            }
+          }, true);
+        </script>
+        <!-- Error handler to catch DataCloneError from browser APIs -->
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
-        <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
+        <header style="background-color: #f5f3f0; padding: 12px 0; border-bottom: 1px solid #e0dbd5; display: flex; align-items: center; justify-content: center;">
+            <img src="/logo.png" alt="Lotus Care Logo" style="height: 32px; width: auto; max-width: 200px; object-fit: contain;" onerror="this.style.display='none'"/>
+        </header>
         <div id="root"></div>
         <!--
       This HTML file is a template.
@@ -38,77 +96,85 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-       
+        <!-- PostHog Analytics - with error protection -->
         <script>
-            !(function (t, e) {
-                var o, n, p, r;
-                e.__SV ||
-                    ((window.posthog = e),
-                    (e._i = []),
-                    (e.init = function (i, s, a) {
-                        function g(t, e) {
-                            var o = e.split(".");
-                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
-                                (t[e] = function () {
-                                    t.push(
-                                        [e].concat(
-                                            Array.prototype.slice.call(
-                                                arguments,
-                                                0,
+            try {
+                !(function (t, e) {
+                    var o, n, p, r;
+                    e.__SV ||
+                        ((window.posthog = e),
+                        (e._i = []),
+                        (e.init = function (i, s, a) {
+                            function g(t, e) {
+                                var o = e.split(".");
+                                2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                                    (t[e] = function () {
+                                        t.push(
+                                            [e].concat(
+                                                Array.prototype.slice.call(
+                                                    arguments,
+                                                    0,
+                                                ),
                                             ),
+                                        );
+                                    });
+                            }
+                            ((p = t.createElement("script")).type =
+                                "text/javascript"),
+                                (p.crossOrigin = "anonymous"),
+                                (p.async = !0),
+                                (p.src =
+                                    s.api_host.replace(
+                                        ".i.posthog.com",
+                                        "-assets.i.posthog.com",
+                                    ) + "/static/array.js"),
+                                (r =
+                                    t.getElementsByTagName(
+                                        "script",
+                                    )[0]).parentNode.insertBefore(p, r);
+                            var u = e;
+                            for (
+                                void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                                    u.people = u.people || [],
+                                    u.toString = function (t) {
+                                        var e = "posthog";
+                                        return (
+                                            "posthog" !== a && (e += "." + a),
+                                            t || (e += " (stub)"),
+                                            e
+                                        );
+                                    },
+                                    u.people.toString = function () {
+                                        return u.toString(1) + ".people (stub)";
+                                    },
+                                    o =
+                                        "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
+                                            " ",
                                         ),
-                                    );
-                                });
-                        }
-                        ((p = t.createElement("script")).type =
-                            "text/javascript"),
-                            (p.crossOrigin = "anonymous"),
-                            (p.async = !0),
-                            (p.src =
-                                s.api_host.replace(
-                                    ".i.posthog.com",
-                                    "-assets.i.posthog.com",
-                                ) + "/static/array.js"),
-                            (r =
-                                t.getElementsByTagName(
-                                    "script",
-                                )[0]).parentNode.insertBefore(p, r);
-                        var u = e;
-                        for (
-                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
-                                u.people = u.people || [],
-                                u.toString = function (t) {
-                                    var e = "posthog";
-                                    return (
-                                        "posthog" !== a && (e += "." + a),
-                                        t || (e += " (stub)"),
-                                        e
-                                    );
-                                },
-                                u.people.toString = function () {
-                                    return u.toString(1) + ".people (stub)";
-                                },
-                                o =
-                                    "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
-                                        " ",
-                                    ),
-                                n = 0;
-                            n < o.length;
-                            n++
-                        )
-                            g(u, o[n]);
-                        e._i.push([i, s, a]);
-                    }),
-                    (e.__SV = 1));
-            })(document, window.posthog || []);
-            posthog.init("phc_xAvL2Iq4tFmANRE7kzbKwaSqp1HJjN7x48s3vr0CMjs", {
-                api_host: "https://us.i.posthog.com",
-                person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well,
-                session_recording: {
-                    recordCrossOriginIframes: true,
-                    capturePerformance: false,
-                },
-            });
+                                    n = 0;
+                                n < o.length;
+                                n++
+                            )
+                                g(u, o[n]);
+                            e._i.push([i, s, a]);
+                        }),
+                        (e.__SV = 1));
+                })(document, window.posthog || []);
+
+                // Safe PostHog initialization with existence check
+                if (window.posthog && typeof window.posthog.init === 'function') {
+                    window.posthog.init("phc_xAvL2Iq4tFmANRE7kzbKwaSqp1HJjN7x48s3vr0CMjs", {
+                        api_host: "https://us.i.posthog.com",
+                        person_profiles: "identified_only",
+                        session_recording: {
+                            recordCrossOriginIframes: true,
+                            capturePerformance: false,
+                        },
+                    });
+                }
+            } catch (error) {
+                console.warn("PostHog initialization error:", error);
+            }
         </script>
     </body>
 </html>

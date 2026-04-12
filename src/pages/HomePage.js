@@ -8,6 +8,7 @@ import {
   testimonials,
 } from '../data/homeData';
 import { useLanguage } from '../lib/LanguageContext';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const HomePage = () => {
   const { t } = useLanguage();
@@ -29,9 +30,12 @@ const HomePage = () => {
   }));
 
   return (
-    <div className="pt-20" data-testid="homepage">
+    <div data-testid="homepage">
+      {/* Language Switcher */}
+      <LanguageSwitcher />
+
       {/* Hero Section */}
-      <section className="bg-cream section-padding" data-testid="hero-section">
+      <section className="bg-cream section-padding pt-20 lg:pt-24" data-testid="hero-section">
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
@@ -55,19 +59,22 @@ const HomePage = () => {
               </p>
 
               {/* Search Bar */}
-              <div className="relative max-w-xl">
+              <div className="relative max-w-xl w-full">
                 <input
                   type="text"
                   placeholder={t('hero_search_placeholder')}
-                  className="w-full rounded-pill border-2 border-lotus-border bg-white pl-5 pr-36 py-4 text-base text-sage-dark placeholder-lotus-text-muted focus:border-sage focus:outline-none focus:ring-4 focus:ring-sage/10 transition-all"
+                  className="w-full rounded-pill border-2 border-lotus-border bg-white pl-4 sm:pl-5 pr-14 sm:pr-36 py-3 sm:py-4 text-sm sm:text-base text-sage-dark placeholder-lotus-text-muted focus:border-sage focus:outline-none focus:ring-4 focus:ring-sage/10 transition-all"
                   data-testid="hero-search-input"
                 />
                 <button
-                  className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary py-2.5 px-6"
+                  className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 btn-primary py-2 sm:py-2.5 px-3 sm:px-6"
                   data-testid="hero-search-btn"
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="hidden sm:flex items-center gap-2">
                     {t('hero_search_btn')} <ArrowRight size={16} />
+                  </span>
+                  <span className="sm:hidden">
+                    <ArrowRight size={16} />
                   </span>
                 </button>
               </div>
@@ -87,19 +94,19 @@ const HomePage = () => {
               </div>
 
               {/* Trust Badges */}
-              <div className="flex items-center gap-6 pt-2">
-                <div className="flex items-center gap-2 text-sm text-lotus-text-mid">
-                  <Check size={18} className="text-sage" />
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 pt-2">
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-lotus-text-mid">
+                  <Check size={16} className="text-sage flex-shrink-0" />
                   <span>{t('hero_trust_verified')}</span>
                 </div>
-                <div className="w-px h-4 bg-lotus-border"></div>
-                <div className="flex items-center gap-2 text-sm text-lotus-text-mid">
-                  <Shield size={18} className="text-sage" />
+                <div className="hidden sm:block w-px h-4 bg-lotus-border"></div>
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-lotus-text-mid">
+                  <Shield size={16} className="text-sage flex-shrink-0" />
                   <span>{t('hero_trust_insured')}</span>
                 </div>
-                <div className="w-px h-4 bg-lotus-border"></div>
-                <div className="flex items-center gap-2 text-sm text-lotus-text-mid">
-                  <Star size={18} className="text-gold fill-gold" />
+                <div className="hidden sm:block w-px h-4 bg-lotus-border"></div>
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-lotus-text-mid">
+                  <Star size={16} className="text-gold fill-gold flex-shrink-0" />
                   <span>{t('hero_trust_rating')}</span>
                 </div>
               </div>
