@@ -35,7 +35,7 @@ const HomePage = () => {
       <LanguageSwitcher />
 
       {/* Hero Section */}
-      <section className="bg-cream section-padding pt-20 lg:pt-24" data-testid="hero-section">
+      <section className="bg-cream section-padding hero-pt-responsive" data-testid="hero-section">
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
@@ -113,7 +113,7 @@ const HomePage = () => {
             </div>
 
             {/* Right - Floating Cards */}
-            <div className="relative hidden lg:block h-[500px]">
+            <div className="relative hidden lg:block h-[500px] overflow-hidden">
               {/* Main Provider Card */}
               <div
                 className="absolute top-8 left-0 card-lotus p-5 w-72 float-animation"

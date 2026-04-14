@@ -109,6 +109,10 @@ module.exports = {
                 animation: {
                         'accordion-down': 'accordion-down 0.2s ease-out',
                         'accordion-up': 'accordion-up 0.2s ease-out'
+                },
+                spacing: {
+                        'navbar-offset-mobile': 'var(--navbar-height-mobile)',
+                        'navbar-offset-sm': 'var(--navbar-height-sm)',
                 }
         }
   },

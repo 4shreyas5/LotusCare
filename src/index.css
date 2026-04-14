@@ -25,6 +25,8 @@
     --input: 40 18% 89%;
     --ring: 140 27% 39%;
     --radius: 0.75rem;
+    --navbar-height-mobile: 4rem;
+    --navbar-height-sm: 5rem;
 }
 
 * {
@@ -35,6 +37,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -84,7 +87,7 @@ code {
     }
 
     .card-lotus {
-        @apply bg-warm-white rounded-card border border-lotus-border/50 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover;
+        @apply bg-warm-white rounded-card border border-lotus-border/50 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover overflow-hidden;
     }
 
     .section-container {

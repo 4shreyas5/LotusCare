@@ -17,87 +17,124 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="nav-sticky fixed top-0 left-0 right-0 z-50 bg-white border-b border-lotus-border" data-testid="navbar">
-      <div className="section-container">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2" data-testid="logo-link">
-            <span className="text-3xl">🪷</span>
-            <div className="flex flex-col">
-              <span className="font-serif text-xl font-semibold text-sage-dark tracking-tight">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white border-b border-lotus-border">
+      
+      {/* ✅ Proper Container */}
+      <div className="max-w-[1200px] mx-auto px-4 w-full">
+        
+        {/* ✅ Navbar Row */}
+        <div className="flex items-center justify-between h-16 sm:h-20 w-full">
+          
+          {/* ✅ Logo (Protected from overflow) */}
+          <Link
+            to="/"
+            className="flex items-center gap-2 flex-shrink-0 max-w-[65%] overflow-hidden"
+          >
+            <span className="text-2xl sm:text-3xl">🪷</span>
+
+            <div className="flex flex-col truncate">
+              <span className="font-serif text-base sm:text-xl font-semibold text-sage-dark truncate">
                 Lotus Care
               </span>
-              <span className="text-[10px] uppercase tracking-[0.15em] text-lotus-text-muted font-medium -mt-0.5">
+              <span className="hidden sm:block text-[10px] uppercase tracking-[0.15em] text-lotus-text-muted font-medium">
                 Home Service Marketplace
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* ✅ Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 className={`text-sm font-medium transition-colors duration-200 hover:text-sage ${
-                  location.pathname === link.path ? 'text-sage' : 'text-lotus-text-mid'
+                  location.pathname === link.path
+                    ? 'text-sage'
+                    : 'text-lotus-text-mid'
                 }`}
-                data-testid={`nav-link-${link.path.split('/').pop()}`}
               >
                 {link.name}
               </Link>
             ))}
           </div>
 
-          {/* Desktop CTAs */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Link
-              to="/category/healthcare"
-              className="btn-primary text-sm"
-              data-testid="find-caregiver-btn"
+          {/* ✅ Desktop Buttons (NO overflow now) */}
+          <div className="hidden lg:flex items-center gap-2">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.lotuscare"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-sm px-3 py-2 whitespace-nowrap"
             >
-              {t('nav_find_caregiver')}
-            </Link>
+              {t('download_android')}
+            </a>
+            <a
+              href="https://apps.apple.com/app/lotus-care/id000000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary text-sm px-3 py-2 whitespace-nowrap"
+            >
+              {t('download_ios')}
+            </a>
           </div>
 
-          {/* Mobile menu button */}
+          {/* ✅ Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-sage-dark"
+            className="lg:hidden p-2 flex-shrink-0"
             onClick={() => setIsOpen(!isOpen)}
-            data-testid="mobile-menu-btn"
             aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* ✅ Mobile Menu (FULL FIXED) */}
         {isOpen && (
-          <div className="lg:hidden pb-6 border-t border-lotus-border mt-2 pt-4" data-testid="mobile-menu">
+          <div className="lg:hidden mt-2 pt-4 pb-6 border-t border-lotus-border w-full max-w-full overflow-hidden">
+            
             <div className="flex flex-col gap-4">
+              
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className="text-base font-medium text-lotus-text-mid hover:text-sage transition-colors"
+                  className="text-base font-medium text-lotus-text-mid hover:text-sage"
                   onClick={() => setIsOpen(false)}
-                  data-testid={`mobile-nav-${link.path.split('/').pop()}`}
                 >
                   {link.name}
                 </Link>
               ))}
+
               <hr className="border-lotus-border my-4" />
-              <button className="btn-ghost text-sm w-fit" data-testid="mobile-sign-in-btn">
+
+              <button className="btn-ghost text-sm w-fit">
                 {t('nav_sign_in')}
               </button>
-              <Link
-                to="/category/healthcare"
-                className="btn-primary text-sm w-fit"
-                onClick={() => setIsOpen(false)}
-                data-testid="mobile-find-caregiver-btn"
-              >
-                {t('nav_find_caregiver')}
-              </Link>
+
+              {/* ✅ Mobile Buttons (stacked properly) */}
+              <div className="flex flex-col gap-2 w-full">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.lotuscare"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-sm w-full text-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t('download_android')}
+                </a>
+
+                <a
+                  href="https://apps.apple.com/app/lotus-care/id000000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-sm w-full text-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t('download_ios')}
+                </a>
+              </div>
+
             </div>
           </div>
         )}

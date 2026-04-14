@@ -7,7 +7,7 @@ const AboutPage = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="pt-16 sm:pt-20 bg-cream min-h-screen" data-testid="about-page">
+    <div className="page-pt-navbar bg-cream min-h-screen" data-testid="about-page">
       {/* Breadcrumb */}
       <div className="bg-warm-white border-b border-lotus-border">
         <div className="section-container py-4">
@@ -82,10 +82,25 @@ const AboutPage = () => {
           </div>
 
           {/* CTA */}
-          <div className="text-center">
-            <Link to="/category/healthcare" className="btn-primary">
-              {t('about_cta', 'Find a Caregiver')}
-            </Link>
+          <div className="text-center flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.lotuscare"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+              data-testid="about-download-android-btn"
+            >
+              {t('download_android')}
+            </a>
+            <a
+              href="https://apps.apple.com/app/lotus-care/id000000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+              data-testid="about-download-ios-btn"
+            >
+              {t('download_ios')}
+            </a>
           </div>
         </div>
       </div>

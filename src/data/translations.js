@@ -11,6 +11,8 @@ export const translations = {
     nav_for_providers: 'For Providers',
     nav_find_caregiver: 'Find a Caregiver',
     nav_sign_in: 'Sign in',
+    download_android: 'Download for Android',
+    download_ios: 'Download for iOS',
 
     // HERO
     hero_badge: 'Trusted by 40,000+ families across India & Europe',
@@ -451,6 +453,8 @@ export const translations = {
     nav_for_providers: 'प्रदाताओं के लिए',
     nav_find_caregiver: 'देखभालकर्ता खोजें',
     nav_sign_in: 'साइन इन',
+    download_android: 'Android के लिए डाउनलोड करें',
+    download_ios: 'iOS के लिए डाउनलोड करें',
 
     // HERO
     hero_badge: 'भारत और यूरोप में 40,000+ परिवारों का भरोसा',
@@ -705,6 +709,8 @@ export const translations = {
     nav_for_providers: 'Für Anbieter',
     nav_find_caregiver: 'Pflegeperson finden',
     nav_sign_in: 'Anmelden',
+    download_android: 'Für Android herunterladen',
+    download_ios: 'Für iOS herunterladen',
 
     // HERO
     hero_badge: 'Von 40.000+ Familien in Indien und Europa vertraut',
@@ -959,6 +965,8 @@ export const translations = {
     nav_for_providers: 'Para proveedores',
     nav_find_caregiver: 'Buscar cuidador',
     nav_sign_in: 'Iniciar sesión',
+    download_android: 'Descargar para Android',
+    download_ios: 'Descargar para iOS',
 
     // HERO
     hero_badge: 'De confianza para más de 40.000 familias en India y Europa',
@@ -1213,6 +1221,8 @@ export const translations = {
     nav_for_providers: 'Voor zorgverleners',
     nav_find_caregiver: 'Vind een verzorger',
     nav_sign_in: 'Inloggen',
+    download_android: 'Download voor Android',
+    download_ios: 'Download voor iOS',
 
     // HERO
     hero_badge: 'Vertrouwd door 40.000+ gezinnen in India en Europa',
@@ -1467,6 +1477,8 @@ export const translations = {
     nav_for_providers: 'Pour les prestataires',
     nav_find_caregiver: 'Trouver un soignant',
     nav_sign_in: 'Se connecter',
+    download_android: 'Télécharger pour Android',
+    download_ios: 'Télécharger pour iOS',
 
     // HERO
     hero_badge: 'La confiance de plus de 40 000 familles en Inde et en Europe',

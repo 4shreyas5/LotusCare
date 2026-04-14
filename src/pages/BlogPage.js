@@ -38,7 +38,7 @@ const BlogPage = () => {
   ];
 
   return (
-    <div className="pt-16 sm:pt-20 bg-cream min-h-screen" data-testid="blog-page">
+    <div className="page-pt-navbar bg-cream min-h-screen" data-testid="blog-page">
       {/* Breadcrumb */}
       <div className="bg-warm-white border-b border-lotus-border">
         <div className="section-container py-4">
