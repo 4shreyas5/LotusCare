@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Heart, Users, Globe } from 'lucide-react';
+import { ChevronRight, Heart, Users, Globe, Apple, Smartphone, Download } from 'lucide-react';
 import { useLanguage } from '../lib/LanguageContext';
 
 const AboutPage = () => {
@@ -87,19 +87,23 @@ const AboutPage = () => {
               href="https://play.google.com/store/apps/details?id=com.lotuscare"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary"
+              className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
               data-testid="about-download-android-btn"
+              title="Get Lotus Care on Google Play"
             >
-              {t('download_android')}
+              <Smartphone size={20} />
+              <span>{t('download_android')}</span>
             </a>
             <a
               href="https://apps.apple.com/app/lotus-care/id000000000"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary"
+              className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
               data-testid="about-download-ios-btn"
+              title="Get Lotus Care on App Store"
             >
-              {t('download_ios')}
+              <Apple size={20} />
+              <span>{t('download_ios')}</span>
             </a>
           </div>
         </div>

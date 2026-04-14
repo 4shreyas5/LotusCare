@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Apple, Smartphone } from 'lucide-react';
 import { useLanguage } from '../lib/LanguageContext';
 
 const Navbar = () => {
@@ -65,16 +65,20 @@ const Navbar = () => {
               href="https://play.google.com/store/apps/details?id=com.lotuscare"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-sm px-3 py-2 whitespace-nowrap"
+              className="inline-flex items-center gap-2 text-sm px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105 whitespace-nowrap"
+              title="Get Lotus Care on Google Play"
             >
+              <Smartphone size={16} />
               {t('download_android')}
             </a>
             <a
               href="https://apps.apple.com/app/lotus-care/id000000000"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary text-sm px-3 py-2 whitespace-nowrap"
+              className="inline-flex items-center gap-2 text-sm px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white font-semibold rounded-lg transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105 whitespace-nowrap"
+              title="Get Lotus Care on App Store"
             >
+              <Apple size={16} />
               {t('download_ios')}
             </a>
           </div>
@@ -113,14 +117,16 @@ const Navbar = () => {
               </button>
 
               {/* ✅ Mobile Buttons (stacked properly) */}
-              <div className="flex flex-col gap-2 w-full">
+              <div className="flex flex-col gap-3 w-full">
                 <a
                   href="https://play.google.com/store/apps/details?id=com.lotuscare"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary text-sm w-full text-center"
+                  className="inline-flex items-center justify-center gap-2 text-sm px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 w-full"
                   onClick={() => setIsOpen(false)}
+                  title="Get Lotus Care on Google Play"
                 >
+                  <Smartphone size={18} />
                   {t('download_android')}
                 </a>
 
@@ -128,9 +134,11 @@ const Navbar = () => {
                   href="https://apps.apple.com/app/lotus-care/id000000000"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary text-sm w-full text-center"
+                  className="inline-flex items-center justify-center gap-2 text-sm px-4 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 w-full"
                   onClick={() => setIsOpen(false)}
+                  title="Get Lotus Care on App Store"
                 >
+                  <Apple size={18} />
                   {t('download_ios')}
                 </a>
               </div>

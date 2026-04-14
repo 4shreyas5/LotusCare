@@ -22,6 +22,8 @@ import SafetyPage from './pages/SafetyPage';
 import GuidelinesPage from './pages/GuidelinesPage';
 import ContactPage from './pages/ContactPage';
 import AccessibilityPage from './pages/AccessibilityPage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
 
 // Layout wrapper with Navbar and Footer
 const Layout = ({ children }) => {
@@ -56,6 +58,8 @@ function App() {
             <Route path="/guidelines" element={<GuidelinesPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/accessibility" element={<AccessibilityPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Instagram, Youtube, Linkedin, Heart } from 'lucide-react';
 import { useLanguage } from '../lib/LanguageContext';
 
 const Footer = () => {
@@ -29,6 +30,11 @@ const Footer = () => {
     ],
   };
 
+  const legalLinks = [
+    { label: 'Terms', path: '/terms' },
+    { label: 'Privacy', path: '/privacy' },
+  ];
+
   const certifications = [];
 
   return (
@@ -52,6 +58,95 @@ const Footer = () => {
             <p className="text-white/70 text-sm leading-relaxed mt-4">
               {t('footer_tagline')}
             </p>
+
+            {/* Social Media Links */}
+            <div className="flex items-center gap-4 mt-6">
+              <a
+                href="https://www.instagram.com/lotuscare.eu/?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-blush transition-colors duration-200"
+                title="Follow us on Instagram"
+                aria-label="Instagram"
+              >
+                <Instagram size={20} />
+              </a>
+              <a
+                href="https://www.youtube.com/@Lotus-care-EU-IN"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-blush transition-colors duration-200"
+                title="Subscribe on YouTube"
+                aria-label="YouTube"
+              >
+                <Youtube size={20} />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/113734043"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-blush transition-colors duration-200"
+                title="Connect on LinkedIn"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={20} />
+              </a>
+              {/* Pinterest - Custom Icon (P) */}
+              <a
+                href="https://in.pinterest.com/lotuscareeu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-blush transition-colors duration-200 font-bold text-lg"
+                title="Follow on Pinterest"
+                aria-label="Pinterest"
+              >
+                P
+              </a>
+              {/* Reddit - Custom Icon (R) */}
+              <a
+                href="https://www.reddit.com/user/AwkwardParty7843/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-blush transition-colors duration-200 font-bold text-lg"
+                title="Follow on Reddit"
+                aria-label="Reddit"
+              >
+                R
+              </a>
+              {/* X (Twitter) - Custom Icon */}
+              <a
+                href="https://x.com/LotusCare"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-blush transition-colors duration-200 font-bold text-lg"
+                title="Follow on X"
+                aria-label="X"
+              >
+                𝕏
+              </a>
+              {/* Medium - Custom Icon */}
+              <a
+                href="https://medium.com/@lotuscare.eu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-blush transition-colors duration-200"
+                title="Read on Medium"
+                aria-label="Medium"
+              >
+                <Heart size={20} />
+              </a>
+              {/* Quora - Custom Icon (Q) */}
+              <a
+                href="https://www.quora.com/profile/Lotus-1188"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-blush transition-colors duration-200 font-bold text-lg"
+                title="Follow on Quora"
+                aria-label="Quora"
+              >
+                Q
+              </a>
+            </div>
           </div>
 
           {/* Services Column */}
@@ -110,20 +205,36 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-white/50">
-            {t('footer_copyright')}
-          </p>
-          <div className="flex items-center gap-4">
-            {certifications.map((cert) => (
-              <span
-                key={cert}
-                className="text-xs text-white/50 border border-white/20 rounded-full px-3 py-1"
-                data-testid={`cert-badge-${cert.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                {cert}
-              </span>
-            ))}
+        <div className="border-t border-white/10 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-sm text-white/50">
+              {t('footer_copyright')}
+            </p>
+
+            {/* Legal Links */}
+            <div className="flex items-center gap-6">
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="text-xs text-white/70 hover:text-white transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-4">
+              {certifications.map((cert) => (
+                <span
+                  key={cert}
+                  className="text-xs text-white/50 border border-white/20 rounded-full px-3 py-1"
+                  data-testid={`cert-badge-${cert.toLowerCase().replace(/\s+/g, '-')}`}
+                >
+                  {cert}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
