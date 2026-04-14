@@ -5,6 +5,7 @@ import { LanguageProvider } from './lib/LanguageContext';
 // Layout Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 // Page Components
 import HomePage from './pages/HomePage';
@@ -41,6 +42,7 @@ function App() {
     <div className="App">
       <LanguageProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
